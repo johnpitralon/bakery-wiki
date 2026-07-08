@@ -89,7 +89,7 @@ task wiki:local               # fallback: API bundle + apply
 | bakery-wiki | LLM-maintained Obsidian wiki | ✅ Active |
 | service-bakery | Legacy monolith platform | 🔄 Migrating away |
 | fake_buster | App (ML fake news) | ✅ Pilot on kind-desktop |
-| stock-trader-grabit | App (trading) | ⬜ Not migrated to v2 |
+| stock-trader-grabit | App (trading) | ✅ Pilot on v2 |
 
 ## Important rules
 
