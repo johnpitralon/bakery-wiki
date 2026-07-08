@@ -25,10 +25,11 @@ infra/kafka/                # placeholder (pilot: reuse broker)
 apps-registry.json          # vstup pro budoucí ApplicationSet
 ```
 
-## Pilot poznámky
+## Pilot poznámky (2026-07-08)
 
 - Root kustomization **neobsahuje** `apps/bakery-onboarding` — onboarding je samostatná Argo Application (vyhnutí se konfliktu namespace `bakery-agent-infra`).
-- `fake-buster` Application může být single-source na `bakery-platform` chart + `deploy-values/fake-buster.yaml`.
+- `fake-buster` Application: single-source na `bakery-platform` chart + `deploy-values/fake-buster.yaml`.
+- Argo stav: **Synced / Healthy** (bakery-gitops-root, bakery-onboarding, fake-buster).
 
 ## Souvislosti
 

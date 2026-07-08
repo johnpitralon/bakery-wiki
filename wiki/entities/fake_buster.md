@@ -4,6 +4,7 @@ type: entity
 tags: [repo, app, pilot, ml]
 created: 2026-07-08
 updated: 2026-07-08
+sources: [platform-v2-pilot-snapshot-2026-07-08.md]
 ---
 
 Pilotní **aplikační** repozitář pro Platform v2 — detekce fake news (labeler, inference, db-writer, crawler, frontend).
@@ -13,15 +14,17 @@ Pilotní **aplikační** repozitář pro Platform v2 — detekce fake news (labe
 - **Local clone**: `<workspace>/fake_buster`
 - **Bootstrap (legacy)**: `./deploy/run-bootstrap.sh` → **DEPRECATED**, nahrazeno GitOps
 
-## Služby (pilot kind-desktop)
+## Služby (pilot kind-desktop, 2026-07-08)
 
 | Služba | Typ | Stav pilotu |
 |--------|-----|-------------|
-| labeler | Java | ✅ Running |
-| inference | Java | ✅ Running |
-| db-writer | Java | ✅ Running |
-| frontend | React | ✅ Running (2 repliky) |
+| labeler | Java | ✅ Running 1/1 |
+| inference | Java | ✅ Running 1/1 |
+| db-writer | Java | ✅ Running 1/1 |
+| frontend | React | ✅ Running 2/2 |
 | crawler | Python CronJob | ✅ existuje |
+
+Argo Application `fake-buster`: **Synced / Healthy**. Helm release: **deployed** rev 15.
 
 ## Konfigurace
 

@@ -27,7 +27,10 @@ Rozdělení monolitické platformy [[entities/service-bakery]] do čtyř rolí �
 
 ## Pilot
 
-První app: [[entities/fake_buster]] na `kind-desktop`. Runbook: `bakery-platform/docs/pilot-runbook.md` (technický; tato wiki = znalostní graf).
+První app: [[entities/fake_buster]] na `kind-desktop`. Stav 2026-07-08: core služby Running, Argo Synced.
+
+Runbook: `bakery-platform/docs/pilot-runbook.md` (technický; tato wiki = znalostní graf).
+Wiki update: [[concepts/LLM wiki maintenance]].
 
 ## Souvislosti
 

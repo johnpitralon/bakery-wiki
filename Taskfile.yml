@@ -1,0 +1,57 @@
+version: '3'
+
+tasks:
+  wiki:update:
+    desc: Trigger wiki update (snapshot + prompt bundle + request marker)
+    cmds:
+      - ./scripts/trigger-wiki-update.sh update
+
+  wiki:ingest:
+    desc: Trigger wiki ingest from raw/
+    cmds:
+      - ./scripts/trigger-wiki-update.sh ingest
+
+  wiki:lint:
+    desc: Trigger wiki lint pass
+    cmds:
+      - ./scripts/trigger-wiki-update.sh lint
+
+  wiki:bundle:
+    desc: Build self-contained prompt bundle for local LLM
+    cmds:
+      - ./scripts/build-prompt-bundle.sh {{.MODE | default "update"}}
+    vars:
+      MODE: '{{.MODE | default "update"}}'
+
+  wiki:run-local:
+    desc: Call local LLM API (Ollama/LM Studio/LiteLLM) and save response
+    cmds:
+      - ./scripts/run-wiki-update-local.sh {{.MODE | default "update"}}
+    vars:
+      MODE: '{{.MODE | default "update"}}'
+
+  wiki:apply:
+    desc: Apply <wiki-file> blocks from LATEST-response.md to wiki/
+    cmds:
+      - ./scripts/apply-wiki-response.sh
+
+  wiki:local:
+    desc: Fallback — API bundle + apply (bez Aider)
+    cmds:
+      - ./scripts/trigger-wiki-update.sh {{.MODE | default "update"}}
+      - ./scripts/run-wiki-update-local.sh {{.MODE | default "update"}}
+      - ./scripts/apply-wiki-response.sh
+    vars:
+      MODE: '{{.MODE | default "update"}}'
+
+  wiki:aider:
+    desc: Wiki update via Aider + local model (recommended)
+    cmds:
+      - ./scripts/wiki-update-aider.sh {{.MODE | default "update"}}
+    vars:
+      MODE: '{{.MODE | default "update"}}'
+
+  setup:
+    desc: One-time git hooks
+    cmds:
+      - ./setup.sh

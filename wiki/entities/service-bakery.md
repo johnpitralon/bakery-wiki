@@ -12,6 +12,7 @@ updated: 2026-07-08
 
 - **Local clone**: `<workspace>/service-bakery`
 - **Stav**: 🔄 Pilot běží paralelně; nový vývoj → bakery-* repozitáře
+- **Argo CD**: legacy Application `service-bakery` stále existuje (Unknown) — **deprecate** ⬜
 
 ## Co se přesouvá
 

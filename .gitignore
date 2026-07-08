@@ -6,3 +6,7 @@ Thumbs.db
 .obsidian/graph.json
 .trash/
 .claude/settings.local.json
+.wiki-update-request
+triggers/out/*.md
+!triggers/out/.gitkeep
+triggers/local-models.env

@@ -25,11 +25,13 @@ Pilot **fake-buster** běží na stejném Kind clusteru **`kind-desktop`** jako 
 | bakery-onboarding | `bakery-agent-infra` |
 | Helm release metadata | `bakery-infrastructure` |
 
-## Rizika / otevřené
+## Rizika / otevřené (2026-07-08)
 
 - ⬜ Kafka — po helm migraci chybí broker; služby odkazují na starý DNS
-- 🔄 Namespace konflikty v gitops-root — řešeno vyjmutím onboarding z root kustomization
-- Registry `localhost:30501` — z podů nedosažitelný; pilot: `kind load` + `IfNotPresent`
+- ✅ Namespace konflikty v gitops-root — řešeno vyjmutím onboarding z root kustomization
+- ✅ Helm fake-buster — deployed rev 15 (po recreate deploymentů v2 chart)
+- ⬜ Registry `localhost:30501` — z podů nedosažitelný; pilot: `kind load` + `IfNotPresent`
+- ⬜ Legacy Argo app `service-bakery` — odstranit po plné migraci
 
 Detailní runbook: `service-bakery/docs/coexistence-kind.md` (technický zdroj).
 

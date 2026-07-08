@@ -26,6 +26,12 @@ Repozitář **infrastrukturního bootstrapu** Platform v2 — náhrada části m
 | `scripts/` | `apply-app-secrets.sh`, `ci-build-from-catalog.sh`, `build-onboarding-image.sh` |
 | `templates/githooks/` | Kanonické git hooky (Kytary-style) |
 
+## Lokální necommitnuté (2026-07-08)
+
+- 🔄 Githooks (`templates/githooks/`, `scripts/refresh-githooks.sh`)
+- 🔄 `image-versions.env` — Go 1.26.4, Java 25, Spring Boot 4.0.7, onboarding image vars
+- 🔄 `docs/image-versions.md`, build skripty pro onboarding
+
 ## Bootstrap pořadí (pilot)
 
 1. Kytary / Argo CD už běží na clusteru
