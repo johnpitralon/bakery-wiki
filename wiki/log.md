@@ -26,11 +26,11 @@ Pilotní nasazení (shrnutí pro wiki — detail v app/cluster stavu):
 - ✅ `bakery-platform` initial.sh — service-ci, gitops-root
 - ✅ `bakery-onboarding` Running v `bakery-agent-infra`
 - ✅ fake-buster pody: labeler, inference, db-writer, frontend (4/4 Running)
-- ✅ Argo `fake-buster` Synced / Healthy (po recreate deploymentů v2 chart)
-- ✅ Helm release `deployed` rev 15 (oprava po timeoutu rev 14)
-- ⬜ Kafka — po helm upgrade chybí broker (dočasný bootstrapServers v values)
-- ⬜ Argo `service-bakery` — legacy app, deprecate
-- 🔄 Githooky + image-versions změny — lokálně, necommitnuto
+- ✅ Argo `fake-buster` Synced / Healthy (5/5 pody po CI + registry fix)
+- ✅ CI E2E: labeler → inference → db-writer → crawler → frontend do kind-registry
+- ⬜ Kafka — disabled v values do infra/kafka
+- ✅ Legacy Argo `service-bakery` smazána
+- ✅ Default branch všech rep: **dev**
 
 Viz [[entities/fake_buster]], [[concepts/Koexistence s Kytary]].
 
@@ -62,6 +62,14 @@ Viz [[entities/fake_buster]], [[concepts/Koexistence s Kytary]].
 
 - [[entities/bakery-onboarding]]: MCP `cmd/mcp-server`, Open WebUI OpenAPI, `/onboard-service`
 - Aktualizováno [[concepts/Service onboarding]]
+
+## [2026-07-08] pilot-fix | Registry :5001 + CI E2E + dev default
+
+- **Registry:** `kind-registry` na host `:5001`; gitops `registryHost: localhost:5001`
+- **configure-kind-registry.sh:** upstream `kind-registry:5000`, fix `docker exec -i`
+- **CI E2E:** 5/5 služeb fake-buster build → registry; `fake-buster` Argo **Healthy**
+- **Větve:** všechny bakery rep — default **`dev`**, `main` = release
+- Aktualizováno: [[entities/fake_buster]], [[concepts/GitOps workflow]], pilot-runbook
 
 ## [2026-07-08] auto-commit | Wiki commit/push po každém update
 
