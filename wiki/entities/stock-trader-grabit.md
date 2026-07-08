@@ -4,6 +4,7 @@ type: entity
 tags: [repo, app, pilot, trading]
 created: 2026-07-08
 updated: 2026-07-08
+sources: [stock-trader-grabit dev e21befc, bakery-gitops dev 1883321]
 sources: []
 ---
 
@@ -33,9 +34,17 @@ Argo Application `stock-trader-grabit`: **Synced / Healthy**.
 - ✅ Auth-proxy routes v `frontend-st` a `grabit-web` (realm fix, ne legacy `service-bakery`)
 - ✅ Login ověřen přes `frontend-st.localhost` a `grabit-web.localhost`
 
-## ⚠️ Otevřené (app scope)
+## Auth (Keycloak RS256 / JWKS) — hotovo
 
-Backend (`JwtTokenProvider`) může stále validovat JWT přes HMAC místo Keycloak RS256/JWKS — autentizovaná `/api/**` volání mohou vracet **401** i když login UI funguje. Navržená oprava: JWKS z Keycloak realm endpointu.
+- ✅ `JwtTokenProvider` — dual mode: `JWT_JWKS_URI` → RS256 přes JWKS (`JwksKeyLocator`), jinak HS256 fallback
+- ✅ GitOps env: `JWT_JWKS_URI` → `keycloak.infrastructure.svc.cluster.local:8080/.../certs`
+- ✅ Deploy stock-trader image tag `e21befc` (commit `e21befc` na `dev`)
+- ✅ E2E: token přes `grabit-web` auth-proxy → `/api/watchlist` a `/api/tickers` **200** (ne 401)
+
+## ⚠️ Otevřené (infra / data)
+
+- Flyway migrace neběžely automaticky při prvním deployi — jednorázově spuštěny v clusteru (2026-07-08). Dlouhodobě: platformní flyway job nebo Spring Flyway při startu ověřit v CI/E2E.
+- Tickers vrací prázdné pole dokud nejsou seed data / provider API klíče v DB.
 
 ## Konfigurace
 

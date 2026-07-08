@@ -100,3 +100,19 @@ Pilot na `kind-desktop` — obě app **Synced / Healthy**:
 Aktualizováno: [[overview]], [[concepts/Platform v2]], [[concepts/Koexistence s Kytary]],
 [[entities/fake_buster]], [[entities/stock-trader-grabit]], [[entities/bakery-platform]],
 [[entities/bakery-gitops]], [[entities/service-bakery]], [[index]], tento log.
+
+## [2026-07-08] decommission | service-bakery repo smazán
+
+- Repozitář **service-bakery** zálohován a odstraněn (GitHub + lokální clone)
+- Tag `platform-v2-pilot-final` = poslední snapshot
+- Decommission checklist v `bakery-platform/docs/decommission-service-bakery.md` — hotovo
+- Aktualizováno [[entities/service-bakery]], tento log
+
+## [2026-07-08] stock-trader-grabit | Plan 1 + JWKS auth fix
+
+- ✅ **Plan 1** (grabit-web trading/markets) — PR #58 merged, CI tag `56d7d29` → frontend/backend features
+- ✅ **JWKS/RS256** — `JwtTokenProvider` + `JWT_JWKS_URI` v gitops; Spring bean fix `e21befc`; CI build + deploy
+- ✅ **E2E auth** — token přes grabit-web auth-proxy; `/api/watchlist` a `/api/tickers` 200 (dříve 401)
+- ⚠️ Flyway — prázdné DB při prvním deployi; jednorázové migrace v clusteru (tx + analytics)
+
+Aktualizováno: [[entities/stock-trader-grabit]], tento log.
