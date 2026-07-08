@@ -11,4 +11,5 @@ Spusť workflow wiki update pro Bakery platformu.
 5. Aktualizuj `wiki/index.md` a append do `wiki/log.md`.
 6. Dodrž pravidla: žádné absolutní cesty v `wiki/*.md`, čeština + anglické tech termíny.
 7. Po dokončení smaž `.wiki-update-request`.
-8. Shrň změny v 3–5 bodech.
+8. **Povinně** spusť `./scripts/wiki-commit-push.sh` (auto commit + push na origin).
+9. Shrň změny v 3–5 bodech.

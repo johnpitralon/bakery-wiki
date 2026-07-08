@@ -8,6 +8,15 @@ Tento soubor čtou automaticky Cursor, Codex, Claude Code, **a lokální stacky*
 Udržuješ **LLM wiki** pro Bakery platformu (Platform v2). Lidské zdroje jsou v `raw/` (neměnit).
 Znalostní graf je v `wiki/` (tvoje doména).
 
+## ⚠️ Povinné pravidlo (Wiki sync policy)
+
+**Každá smysluplná změna** v `bakery-platform`, `bakery-gitops`, `bakery-onboarding`, app repech nebo clusteru → **aktualizuj wiki ve stejné session** před ukončením úkolu.
+
+Minimálně: relevantní `wiki/entities/` nebo `wiki/concepts/`, append `wiki/log.md`, `updated:` ve frontmatter.
+Viz `wiki/concepts/Wiki sync policy.md`.
+
+Pokud pracuješ v jiném bakery repu (ne v bakery-wiki), na konci úkolu otevři bakery-wiki a proveď update (`task wiki:update` nebo `/wiki-update`).
+
 ## Dva způsoby práce
 
 ### 1. Agent s file access (IDE)
@@ -44,5 +53,6 @@ Výstup lokálního modelu: `<wiki-file path="wiki/…">` tagy → `apply-wiki-r
 3. Aktualizuj `wiki/`, `index.md`, append `log.md`
 4. Žádné `/Users/...` v `wiki/*.md`
 5. Smaž `.wiki-update-request` po dokončení
+6. **Vždy** `./scripts/wiki-commit-push.sh` — auto commit + push
 
 Detail: `WIKI_UPDATE.md`, `triggers/README.md`

@@ -51,10 +51,14 @@ Env: `WIKI_LLM_BASE_URL`, `WIKI_LLM_MODEL` — default Ollama `http://127.0.0.1:
 | LiteLLM / bakery gateway | URL z `bakery-agent-infra` |
 | Open WebUI | Vlož `LATEST-prompt.md` do chatu → apply |
 | Cursor / Claude | `/wiki-update` |
+| Aider + Ollama | `task wiki:aider` |
+
+**Povinnost:** viz [[concepts/Wiki sync policy]] — wiki update po každé platformní změně.
 
 Detail: `triggers/README.md`
 
 ## Souvislosti
 
 - [[entities/bakery-wiki]]
+- [[concepts/Wiki sync policy]]
 - [[log]]

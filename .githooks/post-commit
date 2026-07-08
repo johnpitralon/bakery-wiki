@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+# Po commitu: push wiki na origin (main nebo feature branch).
+set -euo pipefail
+REPO_ROOT="$(git rev-parse --show-toplevel)"
+branch="$(git rev-parse --abbrev-ref HEAD)"
+
+if [[ "${WIKI_AUTO_PUSH:-true}" != "true" ]]; then
+  exit 0
+fi
+
+git push -u origin "$branch" 2>/dev/null || {
+  echo "post-commit: push selhal pro $branch — commit je lokálně" >&2
+  exit 0
+}
+echo "post-commit: pushed origin/$branch"

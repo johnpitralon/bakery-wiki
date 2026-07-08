@@ -33,6 +33,7 @@ Katalog stránek wiki. LLM čte tento soubor jako první při dotazech.
 | [[concepts/Koexistence s Kytary]] | Kind `kind-desktop`, sdílený `infrastructure` NS |
 | [[concepts/Image versions]] | `image-versions.env` jako single source of truth |
 | [[concepts/LLM wiki maintenance]] | Trigger pro update wiki (libovolné LLM) |
+| [[concepts/Wiki sync policy]] | **Povinně** — wiki po každé platformní změně |
 
 ## Zdroje
 
@@ -49,7 +50,8 @@ Katalog stránek wiki. LLM čte tento soubor jako první při dotazech.
 
 ```bash
 task wiki:update      # IDE agent nebo příprava bundle
-task wiki:local       # Ollama / LM Studio / LiteLLM — plný pipeline
+task wiki:aider       # lokální model (doporučeno)
+task wiki:local       # API fallback
 ```
 
-Viz [[concepts/LLM wiki maintenance]], `triggers/README.md`.
+Viz [[concepts/LLM wiki maintenance]], [[concepts/Wiki sync policy]].

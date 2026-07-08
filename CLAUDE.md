@@ -95,7 +95,8 @@ task wiki:local               # fallback: API bundle + apply
 
 1. **Never modify `raw/`** (except humans drop sources; auto-snapshot is overwritten)
 2. **Always update `index.md` and `log.md`** after wiki changes
-3. **Update `updated` in frontmatter** when editing a page
+3. **Wiki sync policy** — any agent changing bakery-platform/gitops/onboarding/apps **must** update this wiki in the same session (see `wiki/concepts/Wiki sync policy.md`)
+4. **Update `updated` in frontmatter** when editing a page
 4. **Prefer updating existing pages** over creating new ones
 5. **Track status**: ✅ ⬜ 🔄
 6. **No absolute paths** in `wiki/*.md` — enforced by `.githooks/pre-commit`

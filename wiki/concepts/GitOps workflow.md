@@ -1,39 +1,53 @@
 ---
 title: GitOps workflow
 type: concept
-tags: [gitops, argocd, deploy]
+tags: [gitops, argocd, deploy, applicationset]
 created: 2026-07-08
 updated: 2026-07-08
 ---
 
-Deploy model Platform v2 přes **Argo CD** a repozitář [[entities/bakery-gitops]].
+Deploy model Platform v2: **Argo CD** + [[entities/bakery-gitops]] — **jediný deployer**, žádný ruční helm.
 
 ## Root app
 
-`bakery-gitops-root` (vytvořen `bakery-platform/bootstrap/initial.sh`):
-- Source: `bakery-gitops` repo, path `.`
-- Syncuje Application CRs v `apps/*`
+`bakery-gitops-root` (`bakery-platform/bootstrap/initial.sh`):
+- Source: `bakery-gitops`, path `.`
+- Syncuje ApplicationSet + namespace manifesty
 
-## App deploy (pilot fake-buster)
+## ApplicationSet `bakery-apps`
 
-Varianta **single-source** (kvůli Argo multi-source problémům):
+Generator: `apps/*/app.json` (Kytary-style).
+
+| deployType | Příklad | Zdroje |
+|------------|---------|--------|
+| helm | fake-buster | gitops values + bakery-platform chart |
+| manifests | bakery-onboarding | gitops path |
+
+## App deploy (fake-buster)
+
+- Values: `bakery-gitops/apps/fake-buster/values.yaml` (source of truth)
 - Chart: `bakery-platform/charts/bakery-app`
-- Values: `bakery-platform/deploy-values/fake-buster.yaml`
+- Argo multi-source přes ApplicationSet templatePatch
 
-Alternativa: values pouze v gitops `apps/fake-buster/values.yaml`.
+## CI → image tag (automatizace)
 
-## CI → image tag
-
-1. Změna v app repu → Argo Workflow `service-ci` (Maven/Node/Python/Kaniko)
+1. App změna → Argo Workflow `service-ci`
 2. Push image do registry
-3. Bump tag v gitops values (ručně / budoucí automation)
+3. `ci-build-from-catalog.sh --bump-gitops` nebo `bump-gitops-image-tag.sh`
+4. Commit do gitops → Argo sync
 
-## Git hooky (vývoj)
+## Anti-pattern (zakázáno)
 
-Kytary-style: `local/<user>/<slug>` → PR. Kanonické hooky v `bakery-platform/templates/githooks/`.
+- Ruční `helm upgrade` pro app deploy — konflikt s Argo
+- Legacy Argo app `service-bakery` — smazána
+
+## Git hooky
+
+Kytary-style v `bakery-platform/templates/githooks/` — `task hooks-all`.
 
 ## Souvislosti
 
 - [[entities/bakery-gitops]]
 - [[entities/bakery-platform]]
 - [[concepts/Platform v2]]
+- [[concepts/Wiki sync policy]]

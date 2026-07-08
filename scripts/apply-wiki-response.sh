@@ -62,5 +62,8 @@ for rel, body in blocks:
     dest.write_text(text, encoding="utf-8")
     print(f"✓ {rel}")
 
-print(f"\nAplikováno {len(blocks)} soubor(ů). Zkontroluj diff a commitni.")
+print(f"\nAplikováno {len(blocks)} soubor(ů).")
 PY
+
+echo "==> Commit + push"
+"$ROOT/scripts/wiki-commit-push.sh" "wiki: apply LLM response $(date +%Y-%m-%d)"

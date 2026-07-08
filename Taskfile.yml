@@ -31,9 +31,22 @@ tasks:
       MODE: '{{.MODE | default "update"}}'
 
   wiki:apply:
-    desc: Apply <wiki-file> blocks from LATEST-response.md to wiki/
+    desc: Apply <wiki-file> blocks + auto commit/push
     cmds:
       - ./scripts/apply-wiki-response.sh
+
+  wiki:commit:
+    desc: Commit and push wiki changes
+    cmds:
+      - ./scripts/wiki-commit-push.sh {{.MSG | default ""}}
+    vars:
+      MSG: '{{.MSG | default ""}}'
+
+  wiki:finish:
+    desc: After agent update — commit/push + cleanup request marker
+    cmds:
+      - rm -f .wiki-update-request
+      - ./scripts/wiki-commit-push.sh
 
   wiki:local:
     desc: Fallback — API bundle + apply (bez Aider)

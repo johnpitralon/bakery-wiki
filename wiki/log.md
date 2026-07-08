@@ -47,5 +47,25 @@ Viz [[entities/fake_buster]], [[concepts/Koexistence s Kytary]].
 - `scripts/build-prompt-bundle.sh` — self-contained prompt (`triggers/out/LATEST-prompt.md`)
 - `scripts/run-wiki-update-local.sh` — OpenAI-compatible API (Ollama, LM Studio, LiteLLM)
 - `scripts/apply-wiki-response.sh` — `<wiki-file>` → disk
-- `triggers/local-models.env.example`, `task wiki:local` / `wiki:run-local` / `wiki:apply`
-- Aktualizováno [[concepts/LLM wiki maintenance]], `triggers/README.md`
+- `scripts/wiki-update-aider.sh` — **doporučeno** pro lokální modely
+- Aktualizováno [[concepts/LLM wiki maintenance]]
+
+## [2026-07-08] platform-hardening | PR #1 merged + Argo-only
+
+- **bakery-platform**, **bakery-gitops**, **bakery-onboarding** — PR #1 na `main`
+- ApplicationSet `bakery-apps` z `apps/*/app.json` ([[entities/bakery-gitops]])
+- Argo jediný deployer; `cleanup-legacy-deploy.sh` (helm + service-bakery app)
+- `bump-gitops-image-tag.sh`, `configure-kind-registry.sh`, githooks, CI workflows
+- Aktualizováno: [[overview]], [[entities/bakery-platform]], [[entities/bakery-gitops]], [[concepts/GitOps workflow]]
+
+## [2026-07-08] onboarding-llm | MCP multi-client
+
+- [[entities/bakery-onboarding]]: MCP `cmd/mcp-server`, Open WebUI OpenAPI, `/onboard-service`
+- Aktualizováno [[concepts/Service onboarding]]
+
+## [2026-07-08] auto-commit | Wiki commit/push po každém update
+
+- `scripts/wiki-commit-push.sh` — auto commit + push po update
+- `.githooks/post-commit` — push po každém commitu v bakery-wiki
+- `task wiki:commit`, `task wiki:finish`; `apply-wiki-response.sh` volá commit automaticky
+- Aktualizováno [[concepts/Wiki sync policy]], `AGENTS.md`, `/wiki-update` commands

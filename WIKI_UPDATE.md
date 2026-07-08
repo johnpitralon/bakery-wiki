@@ -35,4 +35,7 @@ Pro Open WebUI: vlož `triggers/out/LATEST-prompt.md` do chatu → `apply-wiki-r
 | `task wiki:update` | snapshot + bundle |
 | `task wiki:aider` | **doporučeno** — lokální model |
 | `task wiki:local` | API fallback |
-| `task wiki:ingest` / `wiki:lint` | režimy |
+| `task wiki:finish` | Po agent update — commit + push + cleanup |
+| `task wiki:commit` | Jen commit + push |
+
+**Auto commit/push** po každém update: `scripts/wiki-commit-push.sh` (vypnutí: `WIKI_AUTO_COMMIT=false`).

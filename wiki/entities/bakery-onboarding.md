@@ -1,12 +1,12 @@
 ---
 title: bakery-onboarding
 type: entity
-tags: [repo, go, onboarding, bootstrap-tier]
+tags: [repo, go, onboarding, mcp, openwebui]
 created: 2026-07-08
 updated: 2026-07-08
 ---
 
-Go HTTP služba pro **onboardování nových mikroservis** do app repozitáře a [[entities/bakery-gitops]]. Zjednodušená varianta **Kytary.Onboarding** pro ekosystém johnpitralon / service-bakery.
+Go služba pro **onboardování nových mikroservis** do app repa a [[entities/bakery-gitops]]. Jeden HTTP kontrakt, více LLM klientů (Open WebUI, Claude, Cursor/Codex přes MCP).
 
 ## Repozitář
 
@@ -15,29 +15,43 @@ Go HTTP služba pro **onboardování nových mikroservis** do app repozitáře a
 - **Local clone**: `<workspace>/bakery-onboarding`
 - **Go modul**: `github.com/johnpitralon/bakery-onboarding`
 
-## API
+## API (kanonický kontrakt)
 
-- `POST /v1/onboard` — strukturovaný JSON (OpenWebUI tool)
+- `POST /v1/onboard` — strukturovaný JSON (`OnboardRequest`)
+- `GET /openapi.json` — Open WebUI tool server
 - Health: `/healthz`, `/readyz`
 
-## Pipeline (MVP)
+## LLM klienti
+
+| Klient | Adaptér | Tool / příkaz |
+|--------|---------|---------------|
+| **Open WebUI** | OpenAPI tool server | `onboardService` |
+| **Claude Code** | MCP stdio `cmd/mcp-server` | `onboard_service` |
+| **Cursor / Codex** | stejný MCP config | `onboard_service` |
+| **CLI** | `cmd/onboard-cli` | flags |
+| **IDE** | slash command | `/onboard-service` |
+
+Dokumentace v repu: `docs/llm-clients.md`, `plugins/mcp/`.
+
+Env MCP: `ONBOARD_URL` (HTTP proxy) nebo `ONBOARD_MODE=local` (in-process).
+
+## Pipeline
 
 `resolve` → `repo_create` → `deploy_scaffold` → `git_hooks` → `gitops_register`
 
-Výstupy:
-- Scaffold v app repu (`services/<lang>/<name>`)
-- Zápis do `service-bakery.yaml`
-- Zápis do `bakery-gitops/apps/<app>/values.yaml`
-- 2× PR (app + gitops)
+Výstupy: scaffold, `service-bakery.yaml`, `bakery-gitops/apps/<app>/values.yaml`, 2× PR.
+
+Workflow: vždy **dry_run=true** první, pak `dry_run=false`.
 
 ## Deploy
 
-- Namespace pilotu: `bakery-agent-infra`
-- Image tag z [[concepts/Image versions|image-versions.env]] (`BAKERY_ONBOARDING_DEPLOY_IMAGE`)
-- Secret `bakery-onboarding-secrets` (`gh-token`) — z app `cluster.env`, ne v platformě
+- Namespace: `bakery-agent-infra`
+- Argo: ApplicationSet `bakery-apps` z `apps/bakery-onboarding/app.json`
+- Image: [[concepts/Image versions|image-versions.env]]
+- Secret `bakery-onboarding-secrets` (`gh-token`) — z app `cluster.env`
 
 ## Souvislosti
 
 - [[concepts/Service onboarding]]
+- [[concepts/Wiki sync policy]]
 - [[entities/bakery-gitops]]
-- [[entities/bakery-platform]]
