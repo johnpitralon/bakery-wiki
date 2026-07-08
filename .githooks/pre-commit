@@ -1,0 +1,22 @@
+#!/usr/bin/env bash
+# Pre-commit: block hardcoded machine-specific paths in wiki/*.md
+pattern='(/Users/|/home/|C:\\Users|workspace_kytary)'
+fail=0
+
+while IFS= read -r -d '' f; do
+  case "$f" in
+    wiki/*.md) ;;
+    *) continue ;;
+  esac
+  hits=$(git show ":$f" 2>/dev/null | grep -nE "$pattern" || true)
+  [ -z "$hits" ] && continue
+  if [ "$fail" -eq 0 ]; then
+    echo "✖ commit zablokován — natvrdo zadané cesty ve wiki/*.md:" >&2
+    echo "  Použij placeholder <workspace>/<repo-name> (viz CLAUDE.md)." >&2
+    fail=1
+  fi
+  echo "── $f" >&2
+  printf '%s\n' "$hits" | sed 's/^/   /' >&2
+done < <(git diff --cached --name-only -z --diff-filter=ACM)
+
+exit $fail
