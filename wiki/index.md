@@ -49,9 +49,9 @@ Katalog stránek wiki. LLM čte tento soubor jako první při dotazech.
 ## Trigger (LLM — IDE i lokální)
 
 ```bash
-task wiki:update      # IDE agent nebo příprava bundle
-task wiki:aider       # lokální model (doporučeno)
-task wiki:local       # API fallback
+task wiki:update      # příprava
+task wiki:aider       # lokální model
+task wiki:finish      # commit + push po agent update
 ```
 
 Viz [[concepts/LLM wiki maintenance]], [[concepts/Wiki sync policy]].

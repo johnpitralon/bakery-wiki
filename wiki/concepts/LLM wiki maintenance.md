@@ -50,10 +50,11 @@ Env: `WIKI_LLM_BASE_URL`, `WIKI_LLM_MODEL` — default Ollama `http://127.0.0.1:
 | LM Studio | `WIKI_LLM_BASE_URL=http://127.0.0.1:1234/v1` |
 | LiteLLM / bakery gateway | URL z `bakery-agent-infra` |
 | Open WebUI | Vlož `LATEST-prompt.md` do chatu → apply |
-| Cursor / Claude | `/wiki-update` |
-| Aider + Ollama | `task wiki:aider` |
+| Cursor / Claude | `/wiki-update` → `task wiki:finish` |
+| Aider + Ollama | `task wiki:aider` → `task wiki:finish` |
 
-**Povinnost:** viz [[concepts/Wiki sync policy]] — wiki update po každé platformní změně.
+Po každém update: **`task wiki:finish`** nebo `wiki-commit-push.sh` (auto commit + push).
+Viz [[concepts/Wiki sync policy]].
 
 Detail: `triggers/README.md`
 
