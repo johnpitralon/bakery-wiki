@@ -12,31 +12,35 @@ Pilotní **aplikační** repozitář pro Platform v2 — detekce fake news (labe
 ## Repozitář
 
 - **Local clone**: `<workspace>/fake_buster`
-- **Bootstrap (legacy)**: `./deploy/run-bootstrap.sh` → **DEPRECATED**, nahrazeno GitOps
+- **Default branch**: `dev`
+- **Deploy**: GitOps — legacy `./deploy/run-bootstrap.sh` **DEPRECATED**
 
 ## Služby (pilot kind-desktop, 2026-07-08)
 
 | Služba | Typ | Stav pilotu |
 |--------|-----|-------------|
-| labeler | Java | ✅ Running 1/1 |
-| inference | Java | ✅ Running 1/1 |
-| db-writer | Java | ✅ Running 1/1 |
-| frontend | React | ✅ Running 2/2 |
+| labeler | Java | ✅ Running |
+| inference | Java | ✅ Running |
+| db-writer | Java | ✅ Running |
+| frontend | React | ✅ Running |
 | crawler | Python CronJob | ✅ existuje |
 
-Argo Application `fake-buster`: **Synced / Healthy**. Helm release: **deployed** rev 15.
+Argo Application `fake-buster`: **Synced / Healthy**.
 
 ## Konfigurace
 
-- Secrets: `deploy/clusters/local/cluster.env` → `fake-buster-secrets` (apply z bakery-platform)
+- Secrets: `deploy/clusters/local/cluster.env` → `apply-app-secrets.sh` z bakery-platform
 - CI katalog: `service-bakery.yaml`
-- Deploy values (v2): `bakery-gitops/apps/fake-buster/values.yaml` + `bakery-platform/deploy-values/fake-buster.yaml`
+- Deploy values: `bakery-gitops/apps/fake-buster/values.yaml`
 
 ## Infra závislosti (pilot)
 
-- Postgres: CNPG `kytary-pg1-rw.infrastructure.svc.cluster.local`, DB `labeler_db`, user `labeler`
-- Kafka: dočasně odkaz na `fake-buster-kafka.bakery-infrastructure` — **broker po migraci chybí** (⬜)
-- Registry: `localhost:30501` (Kind)
+- Postgres: CNPG `kytary-pg1-rw.infrastructure.svc.cluster.local`, DB `labeler_db`
+- Kafka: `kafka.infrastructure.svc.cluster.local:9092`
+- Keycloak: realm `fake-buster`, frontend URL `https://keycloak.local.k8s.kytary.cz`
+- Registry: `localhost:5001` (node pull) / `host.docker.internal:5001` (Kaniko push)
+
+Login ověřen přes frontend auth-proxy.
 
 ## Souvislosti
 

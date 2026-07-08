@@ -10,7 +10,7 @@ Katalog stránek wiki. LLM čte tento soubor jako první při dotazech.
 
 ## Přehled
 
-- [[overview|Přehled platformy]] — Platform v2, repozitáře, pilot fake-buster
+- [[overview|Přehled platformy]] — Platform v2, repozitáře, pilot fake-buster + stock-trader-grabit ✅
 
 ## Entity (repozitáře & systémy)
 
@@ -22,6 +22,7 @@ Katalog stránek wiki. LLM čte tento soubor jako první při dotazech.
 | [[entities/bakery-wiki]] | Obsidian vault + LLM wiki (tento repozitář) |
 | [[entities/service-bakery]] | Legacy monolitická platforma (migrace pryč) |
 | [[entities/fake_buster]] | Pilotní app — labeler, inference, db-writer, frontend, crawler |
+| [[entities/stock-trader-grabit]] | App — stock-trader, grabit-web, frontend-st (pilot v2) |
 
 ## Koncepty
 
@@ -30,7 +31,7 @@ Katalog stránek wiki. LLM čte tento soubor jako první při dotazech.
 | [[concepts/Platform v2]] | Rozdělení platformy na 4+ repozitáře (Kytary-style) |
 | [[concepts/GitOps workflow]] | Argo CD, bakery-gitops-root, app Applications |
 | [[concepts/Service onboarding]] | bakery-onboarding pipeline a artefakty |
-| [[concepts/Koexistence s Kytary]] | Kind `kind-desktop`, sdílený `infrastructure` NS |
+| [[concepts/Koexistence s Kytary]] | Kind `kind-desktop`, sdílený `infrastructure` NS, **scope hranice** |
 | [[concepts/Image versions]] | `image-versions.env` jako single source of truth |
 | [[concepts/LLM wiki maintenance]] | Trigger pro update wiki (libovolné LLM) |
 | [[concepts/Wiki sync policy]] | **Povinně** — wiki po každé platformní změně |

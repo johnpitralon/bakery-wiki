@@ -17,15 +17,22 @@ updated: 2026-07-08
 | [[entities/bakery-gitops]] | GitOps + ApplicationSet |
 | [[entities/bakery-onboarding]] | Onboard API (OWUI + MCP) |
 | [[entities/bakery-wiki]] | LLM wiki — [[concepts/Wiki sync policy]] |
-| [[entities/fake_buster]] | Pilotní app |
+| [[entities/fake_buster]] | Pilotní app #1 (ML) |
+| [[entities/stock-trader-grabit]] | Pilotní app #2 (trading) |
 
-## Pilot kind-desktop (2026-07-08)
+## Pilot kind-desktop (2026-07-08) — ✅ hotovo
 
-- fake-buster: **Running**, Argo **Synced/Healthy**
-- ApplicationSet `bakery-apps` aktivní
-- Argo jediný deployer (helm release legacy smazán)
-- PR #1 merged ve všech bakery-* repech
-- ⬜ Kafka (vypnuto v values), ⬜ fake_buster Spring 4.0.7 commit
+| App | Argo | Login |
+|-----|------|-------|
+| fake-buster | Synced / Healthy | ✅ auth-proxy |
+| stock-trader-grabit | Synced / Healthy | ✅ auth-proxy |
+
+- ApplicationSet `bakery-apps` na větvi **`dev`**
+- Argo jediný deployer (legacy helm smazán)
+- Kafka v `infra/kafka`, registry `:5001`, Keycloak realmy bootstrap
+- [[entities/service-bakery]] deprecated (tag `platform-v2-pilot-final`)
+
+Runbook: `bakery-platform/docs/pilot-runbook.md`
 
 ## Architektura
 
@@ -39,5 +46,6 @@ Wiki ← každá platformní změna ([[concepts/Wiki sync policy]])
 
 - [[concepts/Platform v2]]
 - [[concepts/GitOps workflow]]
+- [[concepts/Koexistence s Kytary]]
 - [[concepts/Service onboarding]]
 - [[concepts/LLM wiki maintenance]]

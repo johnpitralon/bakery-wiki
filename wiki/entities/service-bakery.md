@@ -6,13 +6,13 @@ created: 2026-07-08
 updated: 2026-07-08
 ---
 
-**Legacy** monolitická platforma — Helm chart `service-bakery`, Ansible, bootstrap skripty, onboarding v `services/go/onboarding`. Cíl migrace: **zahodit** po dokončení Platform v2 (viz [[concepts/Platform v2]]).
+**Legacy** monolitická platforma — Helm chart `service-bakery`, Ansible, bootstrap skripty, onboarding v `services/go/onboarding`. **Deprecated** po dokončení Platform v2 pilotu (viz [[concepts/Platform v2]]).
 
 ## Repozitář
 
 - **Local clone**: `<workspace>/service-bakery`
-- **Stav**: 🔄 Pilot běží paralelně; nový vývoj → bakery-* repozitáře
-- **Argo CD**: legacy Application `service-bakery` — **smazána** ✅ (2026-07-08)
+- **Stav**: 🛑 **DEPRECATED** — `.DO_NOT_USE`, README banner, tag `platform-v2-pilot-final`
+- **Argo CD**: legacy Application `service-bakery` — **smazána** ✅
 
 ## Co se přesouvá
 
@@ -34,3 +34,4 @@ updated: 2026-07-08
 
 - [[concepts/Platform v2]]
 - [[entities/bakery-platform]]
+- [[overview]]

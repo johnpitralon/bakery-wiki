@@ -11,7 +11,7 @@ updated: 2026-07-08
 ## Repozitář
 
 - **URL**: https://github.com/johnpitralon/bakery-gitops
-- **Default branch**: `main`
+- **Default branch**: `dev`
 - **Local clone**: `<workspace>/bakery-gitops`
 
 ## Struktura (2026-07-08)
@@ -19,36 +19,39 @@ updated: 2026-07-08
 ```
 argocd/applicationset.yaml   # bakery-apps — git generator apps/*/app.json
 apps/fake-buster/
-  app.json                   # helm app metadata
-  values.yaml                # deploy source of truth
+  app.json
+  values.yaml
+apps/stock-trader-grabit/
+  app.json
+  values.yaml
 apps/bakery-onboarding/
-  app.json                   # manifests app
+  app.json
   manifests/
-infra/fake-buster-db/        # db-init skeleton
-infra/kafka/                 # placeholder
-apps-registry.json           # lidský index → app.json
+infra/fake-buster-db/        # CNPG db-init
+infra/stock-trader-grabit-db/
+infra/kafka/                 # Kafka StatefulSet + Service
+apps-registry.json
 ```
 
 ## ApplicationSet
 
 Jeden Application per `apps/*/app.json` (Kytary-style):
-- **helm** (`fake-buster`): multi-source — gitops values + `bakery-platform` chart
+- **helm** (`fake-buster`, `stock-trader-grabit`): multi-source — gitops values + `bakery-platform` chart
 - **manifests** (`bakery-onboarding`): path `apps/bakery-onboarding/manifests`
-
-Statické `application.yaml` CR **odstraněny** — generuje ApplicationSet.
 
 ## Deploy pravidlo
 
-**Argo CD jediný deployer** — žádný ruční `helm upgrade`. Legacy helm release v `bakery-infrastructure` smazán (`cleanup-legacy-deploy.sh`).
+**Argo CD jediný deployer** — žádný ruční `helm upgrade`. Legacy helm release smazán (`cleanup-legacy-deploy.sh`).
 
-## Pilot stav
+## Pilot stav (2026-07-08)
 
-- Argo: `bakery-gitops-root`, `fake-buster`, `bakery-onboarding` — **Synced / Healthy**
-- Kafka v values: `bootstrapServers: ""` (vypnuto do infra/kafka)
-- CI: `.github/workflows/validate.yml` (kustomize build)
+- Argo: `bakery-gitops-root`, `fake-buster`, `stock-trader-grabit`, `bakery-onboarding` — **Synced / Healthy**
+- Kafka: `bootstrapServers: kafka.infrastructure.svc.cluster.local:9092` v obou app values
+- Keycloak URL: `https://keycloak.local.k8s.kytary.cz` + per-app realmy
 
 ## Souvislosti
 
 - [[concepts/GitOps workflow]]
 - [[entities/bakery-platform]]
 - [[entities/fake_buster]]
+- [[entities/stock-trader-grabit]]

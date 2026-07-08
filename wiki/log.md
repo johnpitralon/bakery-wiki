@@ -58,6 +58,13 @@ Viz [[entities/fake_buster]], [[concepts/Koexistence s Kytary]].
 - `bump-gitops-image-tag.sh`, `configure-kind-registry.sh`, githooks, CI workflows
 - Aktualizováno: [[overview]], [[entities/bakery-platform]], [[entities/bakery-gitops]], [[concepts/GitOps workflow]]
 
+## [2026-07-08] stock-trader-grabit | Plán 1 (Trading/Markets) nasazen + bump-tag fix
+
+- **stock-trader-grabit PR #58** mergnut do dev: order creation, watchlist, `instrumentType` filtr, logout/close position, bez mock dat. CI build 3 služeb → tag `56d7d29`, Argo Synced/Healthy.
+- **bakery-platform:** fix `bump-gitops-image-tag.sh` — regex `\1` + tag začínající číslicí korumpoval values.yaml (`\g<1>` fix, commit 6cf0034). Poškozený bump opraven v bakery-gitops (PR #11).
+- **⚠️ Objeven blocker:** backend validuje JWT HS256 shared secretem, Keycloak vydává RS256 → všechna autentizovaná `/api/**` 401. Viz [[entities/stock-trader-grabit]].
+- Přidáno [[entities/stock-trader-grabit]]; aktualizován [[index]].
+
 ## [2026-07-08] onboarding-llm | MCP multi-client
 
 - [[entities/bakery-onboarding]]: MCP `cmd/mcp-server`, Open WebUI OpenAPI, `/onboard-service`
@@ -77,3 +84,19 @@ Viz [[entities/fake_buster]], [[concepts/Koexistence s Kytary]].
 - `.githooks/post-commit` — push po každém commitu v bakery-wiki
 - `task wiki:commit`, `task wiki:finish`; `apply-wiki-response.sh` volá commit automaticky
 - Aktualizováno [[concepts/Wiki sync policy]], `AGENTS.md`, `/wiki-update` commands
+
+## [2026-07-08] pilot-complete | Platform v2 pilot dokončen
+
+Pilot na `kind-desktop` — obě app **Synced / Healthy**:
+
+- ✅ **fake-buster** — Kafka, Keycloak realm, login auth-proxy, registry `:5001`
+- ✅ **stock-trader-grabit** — CI prereqs, Keycloak realm, auth-proxy fix, login ověřen
+- ✅ **Kafka** — `infra/kafka/` v bakery-gitops, obě app values wired
+- ✅ **Keycloak** — `ensure-keycloak-realm.sh`, URL `keycloak.local.k8s.kytary.cz`
+- ✅ **Scope hranice** — runbook + wiki: nemazat kytary feat preview Argo apps
+- ✅ **service-bakery** — deprecated (tag `platform-v2-pilot-final`)
+- ✅ **bakery-platform PR #12** — runbook scope + bump-gitops regex fix
+
+Aktualizováno: [[overview]], [[concepts/Platform v2]], [[concepts/Koexistence s Kytary]],
+[[entities/fake_buster]], [[entities/stock-trader-grabit]], [[entities/bakery-platform]],
+[[entities/bakery-gitops]], [[entities/service-bakery]], [[index]], tento log.

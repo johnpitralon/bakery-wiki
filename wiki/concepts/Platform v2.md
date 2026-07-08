@@ -23,17 +23,22 @@ Rozdělení monolitické platformy [[entities/service-bakery]] do čtyř rolí �
 2. **Secrets v app repu** — `cluster.env`, ne v bakery-platform
 3. **Verze imagí** — `bakery-platform/image-versions.env` (rule #9)
 4. **GitOps jako source of truth** pro deploy stav clusteru
-5. **service-bakery se po migraci zahodí** — neudržovat paralelně
+5. **service-bakery deprecated** — nový vývoj jen v bakery-* repozitářích
 
-## Pilot
+## Pilot (2026-07-08) — ✅ dokončen
 
-První app: [[entities/fake_buster]] na `kind-desktop`. Stav 2026-07-08: core služby Running, Argo Synced.
+Oba pilotní app repa na `kind-desktop` vedle Kytary stacku:
 
-Runbook: `bakery-platform/docs/pilot-runbook.md` (technický; tato wiki = znalostní graf).
-Wiki update: [[concepts/LLM wiki maintenance]].
+- [[entities/fake_buster]] — ML fake news pipeline
+- [[entities/stock-trader-grabit]] — trading + GrabIt Web
+
+Sdílená infra: CNPG, Keycloak, Traefik, Argo CD. Bakery-owned: Kafka v `infra/kafka`.
+
+Runbook: `bakery-platform/docs/pilot-runbook.md` (včetně hranic scope s Kytary).
 
 ## Souvislosti
 
 - [[overview]]
 - [[concepts/GitOps workflow]]
+- [[concepts/Koexistence s Kytary]]
 - [[entities/bakery-platform]]
