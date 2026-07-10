@@ -4,7 +4,7 @@ type: entity
 tags: [repo, app, pilot, trading]
 created: 2026-07-08
 updated: 2026-07-10
-sources: [stock-trader-grabit dev b738b4e, bakery-gitops dev]
+sources: [stock-trader-grabit dev, bakery-platform dev, bakery-gitops dev]
 ---
 
 **Aplikační** repozitář na Platform v2 — obchodní platforma (stock-trader backend, GrabIt Web, Admin frontend).
@@ -29,7 +29,8 @@ Argo Application `stock-trader-grabit`: **Synced / Healthy**.
 
 - ✅ **Plan 1** — grabit-web Trading/Markets + JWKS auth (`512bbbd`, `e21befc`)
 - ✅ **Plan 2** — hygiena repa, Platform v2 docs, Node 20, demo credentials flag (`7871cea`, `433fe20`, `b738b4e`); gitops `NEXT_PUBLIC_SHOW_DEMO_CREDENTIALS=true` pro lokální pilot
-- ⬜ **Plány 3–5** — viz `docs/plans/README.md` v app repu
+- ✅ **Plan 3** — pin SHA tagů v gitops, CI IMAGE_TAG z HEAD, PR checks workflow (`.github/workflows/pr-checks.yml`)
+- ⬜ **Plány 4–5** — viz `docs/plans/README.md` v app repu
 
 ## Platform v2 migrace (hotovo)
 

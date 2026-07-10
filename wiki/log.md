@@ -117,6 +117,16 @@ Aktualizováno: [[overview]], [[concepts/Platform v2]], [[concepts/Koexistence s
 
 Aktualizováno: [[entities/stock-trader-grabit]], tento log.
 
+## [2026-07-10] stock-trader-grabit | Plan 3 dokončen
+
+- ✅ GitOps values už pinují SHA tagy (stock-trader `e21befc`, frontends `56d7d29`); Argo **Synced / Healthy**
+- ✅ CI: `ci-build-from-catalog.sh` defaultuje `IMAGE_TAG` z lokálního git HEAD; Kaniko dual tag SHA + `latest`
+- ✅ `deploy/run-ci-build.sh` — export IMAGE_TAG, volitelný `GITOPS_BUMP=true`
+- ✅ `.github/workflows/pr-checks.yml` — backend testy, grabit-web jest/build, frontend-st build na PR
+- ⬜ Argo Image Updater — follow-up (žádný vzor v bakery-gitops)
+
+Aktualizováno: [[entities/stock-trader-grabit]], tento log.
+
 ## [2026-07-10] stock-trader-grabit | Plan 2 dokončen
 
 - ✅ Odstraněny verzované `coverage/` a `.idea/` z gitu; `.gitignore` doplněn
