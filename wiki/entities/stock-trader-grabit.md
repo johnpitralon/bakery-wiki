@@ -68,6 +68,20 @@ Argo Application `stock-trader-grabit`: **Synced / Healthy**.
 - Keycloak: realm `stock-trader-grabit`, host URL `https://keycloak.local.k8s.kytary.cz`
 - Registry: `localhost:5001`
 
+## Backend refactoring (Plán 4, 2026-07-10)
+
+God class `TickerService` rozdělen na doménové služby v `service/ticker/` — veřejné API `TickerService` zůstává fasáda pro handlery/schedulery:
+
+| Služba | Účel |
+|--------|------|
+| `TickerQueryService` | read/search, price history lookup |
+| `TickerImportService` | listing sync, EODHD/popular import |
+| `CompanyInfoService` | Alpha Vantage OVERVIEW, EODHD fundamentals |
+| `PriceHistoryService` | daily time series import/UPSERT |
+| `EarningsService` | earnings calendar, reported-earnings job |
+
+`TickerService` ~1100 řádků (dříve ~4470); zbývá price update joby + international price v fasádě.
+
 ## Souvislosti
 
 - [[entities/bakery-gitops]], [[entities/bakery-platform]]

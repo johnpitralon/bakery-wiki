@@ -156,3 +156,12 @@ Aktualizováno: [[entities/stock-trader-grabit]], tento log.
 - ✅ Pody v NS `stock-trader-grabit`: stock-trader, grabit-web, frontend-st **Running** (2026-07-10)
 
 Aktualizováno: [[entities/stock-trader-grabit]], tento log.
+
+## [2026-07-10] stock-trader-grabit | Plan 4 — TickerService split dokončen
+
+- ✅ `CompanyInfoService`, `PriceHistoryService`, `EarningsService` extrahovány z `TickerService`
+- ✅ Oprava korupce `TickerService` po `TickerImportService` extrakci
+- ✅ `TickerService` fasáda ~1100 ř. (dříve ~4470); handlery/schedulery beze změny API
+- ⬜ Úloha 7: PR CI + smoke v clusteru po merge
+
+Aktualizováno: [[entities/stock-trader-grabit]], tento log.
