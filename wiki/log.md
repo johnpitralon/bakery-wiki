@@ -117,6 +117,17 @@ Aktualizováno: [[overview]], [[concepts/Platform v2]], [[concepts/Koexistence s
 
 Aktualizováno: [[entities/stock-trader-grabit]], tento log.
 
+## [2026-07-10] stock-trader-grabit | Plan 4 (částečně)
+
+- ✅ `TickerQueryService` extrahován z `TickerService` (read/search/history queries)
+- ✅ Testy: `TickerQueryServiceTest`, `TickerServiceTest`, `TradingServiceTest`, `TradingHandlerTest`
+- ✅ `AutomatedOpenApiGenerator` — odstraněny neimplementované Postman/AI větve
+- ✅ `application.properties` — odstraněny nebezpečné defaulty (JWT, DB, legacy hosty)
+- ✅ `docs/provider-api-keys.md`; gitops `SPRING_KAFKA_BOOTSTRAP_SERVERS`
+- 🔄 Zbývá: další extrakce TickerService (Import, CompanyInfo, …), finální smoke
+
+Aktualizováno: [[entities/stock-trader-grabit]], tento log.
+
 ## [2026-07-10] stock-trader-grabit | Plan 3 dokončen
 
 - ✅ GitOps values už pinují SHA tagy (stock-trader `e21befc`, frontends `56d7d29`); Argo **Synced / Healthy**

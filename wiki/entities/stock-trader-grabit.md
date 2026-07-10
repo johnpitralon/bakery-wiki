@@ -30,7 +30,8 @@ Argo Application `stock-trader-grabit`: **Synced / Healthy**.
 - ✅ **Plan 1** — grabit-web Trading/Markets + JWKS auth (`512bbbd`, `e21befc`)
 - ✅ **Plan 2** — hygiena repa, Platform v2 docs, Node 20, demo credentials flag (`7871cea`, `433fe20`, `b738b4e`); gitops `NEXT_PUBLIC_SHOW_DEMO_CREDENTIALS=true` pro lokální pilot
 - ✅ **Plan 3** — pin SHA tagů v gitops, CI IMAGE_TAG z HEAD, PR checks workflow (`.github/workflows/pr-checks.yml`)
-- ⬜ **Plány 4–5** — viz `docs/plans/README.md` v app repu
+- 🔄 **Plan 4** — TickerQueryService extrakce, config hardening, trading tests, provider-api-keys docs (zbývá další extrakce TickerService)
+- ⬜ **Plán 5** — viz `docs/plans/README.md` v app repu
 
 ## Platform v2 migrace (hotovo)
 
