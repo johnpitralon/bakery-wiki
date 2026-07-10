@@ -3,7 +3,7 @@ title: Log
 type: overview
 tags: [log, meta]
 created: 2026-07-08
-updated: 2026-07-08
+updated: 2026-07-10
 ---
 
 Chronologický záznam aktivit wiki — ingest, query, lint, údržba.
@@ -114,5 +114,16 @@ Aktualizováno: [[overview]], [[concepts/Platform v2]], [[concepts/Koexistence s
 - ✅ **JWKS/RS256** — `JwtTokenProvider` + `JWT_JWKS_URI` v gitops; Spring bean fix `e21befc`; CI build + deploy
 - ✅ **E2E auth** — token přes grabit-web auth-proxy; `/api/watchlist` a `/api/tickers` 200 (dříve 401)
 - ⚠️ Flyway — prázdné DB při prvním deployi; jednorázové migrace v clusteru (tx + analytics)
+
+Aktualizováno: [[entities/stock-trader-grabit]], tento log.
+
+## [2026-07-10] stock-trader-grabit | Plan 2 dokončen
+
+- ✅ Odstraněny verzované `coverage/` a `.idea/` z gitu; `.gitignore` doplněn
+- ✅ Docs sjednoceny na Platform v2 (README, bootstrap deprecated, `cluster.env.example`, Taskfile `secrets` task)
+- ✅ grabit-web Dockerfile: Node 20; login UI: demo credentials jen při `NEXT_PUBLIC_SHOW_DEMO_CREDENTIALS=true`
+- ✅ `deploy/clusters/local/cluster.yaml` — Platform v2 profil (jen `cluster_name`, bez legacy `app_repos`)
+- ✅ GitOps: `NEXT_PUBLIC_SHOW_DEMO_CREDENTIALS: "true"` u `grabit-web` a `frontend-st` pro lokální pilot
+- ✅ Pody v NS `stock-trader-grabit`: stock-trader, grabit-web, frontend-st **Running** (2026-07-10)
 
 Aktualizováno: [[entities/stock-trader-grabit]], tento log.

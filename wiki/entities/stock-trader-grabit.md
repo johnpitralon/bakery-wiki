@@ -3,9 +3,8 @@ title: stock-trader-grabit
 type: entity
 tags: [repo, app, pilot, trading]
 created: 2026-07-08
-updated: 2026-07-08
-sources: [stock-trader-grabit dev e21befc, bakery-gitops dev 1883321]
-sources: []
+updated: 2026-07-10
+sources: [stock-trader-grabit dev b738b4e, bakery-gitops dev]
 ---
 
 **Aplikační** repozitář na Platform v2 — obchodní platforma (stock-trader backend, GrabIt Web, Admin frontend).
@@ -25,6 +24,12 @@ sources: []
 | frontend-st | React (Next.js) | ✅ Running |
 
 Argo Application `stock-trader-grabit`: **Synced / Healthy**.
+
+## Plány dotažení (2026-07)
+
+- ✅ **Plan 1** — grabit-web Trading/Markets + JWKS auth (`512bbbd`, `e21befc`)
+- ✅ **Plan 2** — hygiena repa, Platform v2 docs, Node 20, demo credentials flag (`7871cea`, `433fe20`, `b738b4e`); gitops `NEXT_PUBLIC_SHOW_DEMO_CREDENTIALS=true` pro lokální pilot
+- ⬜ **Plány 3–5** — viz `docs/plans/README.md` v app repu
 
 ## Platform v2 migrace (hotovo)
 
