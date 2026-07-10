@@ -117,6 +117,14 @@ Aktualizováno: [[overview]], [[concepts/Platform v2]], [[concepts/Koexistence s
 
 Aktualizováno: [[entities/stock-trader-grabit]], tento log.
 
+## [2026-07-10] stock-trader-grabit | Plan 4 — TickerImportService
+
+- ✅ `TickerImportService` — listing/EODHD/popular/symbol import + `upsertTickersFromProvider` s Map loaded/updated
+- ✅ `TickerSymbolUtils`, `TickerCompanyInfoMapper` — sdílené helpery
+- ✅ `TickerService` zmenšen na fasádu (~3600 ř., dříve ~4400)
+
+Aktualizováno: [[entities/stock-trader-grabit]], tento log.
+
 ## [2026-07-10] stock-trader-grabit | Plan 4 (částečně)
 
 - ✅ `TickerQueryService` extrahován z `TickerService` (read/search/history queries)
