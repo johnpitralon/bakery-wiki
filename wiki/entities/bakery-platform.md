@@ -3,7 +3,7 @@ title: bakery-platform
 type: entity
 tags: [repo, platform, bootstrap, helm, ci, githooks]
 created: 2026-07-08
-updated: 2026-07-08
+updated: 2026-07-10
 ---
 
 Repozitář **infrastrukturního bootstrapu** Platform v2 — náhrada části [[entities/service-bakery]]. Role **Kytary.K8S.Infrastructure**.
@@ -27,6 +27,7 @@ Repozitář **infrastrukturního bootstrapu** Platform v2 — náhrada části [
 | `scripts/cleanup-legacy-deploy.sh` | Odstranění helm release + legacy Argo app |
 | `scripts/ensure-ci-prereqs.sh` | Secrets + maven PVC pro CI v app NS |
 | `scripts/ensure-keycloak-realm.sh` | Realm + uživatelé z cluster.env |
+| `scripts/utils/ensure-kind-registry-host.sh` | Host Docker `kind-registry` + persist `~/docker-persistent/worker1/registry` |
 | `scripts/utils/configure-kind-registry.sh` | Kind containerd pro registry pull |
 | `docs/pilot-runbook.md` | Pilot runbook včetně scope hranic s Kytary |
 | `templates/githooks/` | Kytary-style git hooky |
@@ -43,7 +44,7 @@ Repozitář **infrastrukturního bootstrapu** Platform v2 — náhrada části [
 2. `./bootstrap/initial.sh`
 3. `./scripts/apply-app-secrets.sh <app-repo> local`
 4. `./scripts/ensure-keycloak-realm.sh <app-repo> local`
-5. `./scripts/utils/configure-kind-registry.sh`
+5. `./scripts/utils/ensure-kind-registry-host.sh` + `./scripts/utils/configure-kind-registry.sh` (nebo `task kind-registry`)
 6. Argo sync [[entities/bakery-gitops]]
 
 ## Souvislosti

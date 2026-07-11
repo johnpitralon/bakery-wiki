@@ -3,7 +3,7 @@ title: Koexistence s Kytary
 type: concept
 tags: [kind, pilot, infrastructure, scope]
 created: 2026-07-08
-updated: 2026-07-08
+updated: 2026-07-10
 ---
 
 Pilot **Platform v2** běží na stejném Kind clusteru **`kind-desktop`** jako Kytary stack — bez druhého Traefiku a bez duplicitního Postgresu.
@@ -39,7 +39,7 @@ Při údržbě clusteru **nikdy**:
 
 Kytary feat preview apps (`Unknown`, `ImagePullBackOff`) jsou očekávané — řeší je kytary tým / jejich ApplicationSet TTL, ne bakery.
 
-**Povolený bakery cleanup:** completed CI pody v `fake-buster` a `stock-trader-grabit`; legacy bakery helm přes `cleanup-legacy-deploy.sh`.
+**Povolený bakery cleanup:** CronJob `bakery-pod-cleanup` (`infra/pod-cleanup/`) — terminalní pody cluster-wide; ručně completed CI v `fake-buster` / `stock-trader-grabit`; legacy helm přes `cleanup-legacy-deploy.sh`.
 
 Detail: `bakery-platform/docs/pilot-runbook.md` (sekce *Sdílený cluster — hranice scope*).
 
@@ -48,7 +48,7 @@ Detail: `bakery-platform/docs/pilot-runbook.md` (sekce *Sdílený cluster — hr
 - ✅ ApplicationSet `bakery-apps` z `apps/*/app.json` (větev `dev`)
 - ✅ Argo jediný deployer — legacy helm + `service-bakery` app smazány
 - ✅ Kafka `infra/kafka/` + obě app values wired
-- ✅ Registry `localhost:5001` → `kind-registry:5000` (`configure-kind-registry.sh`)
+- ✅ Registry `localhost:5001` → `kind-registry:5000`; data `~/docker-persistent/worker1/registry`; GitOps `infra/registry/` (ExternalName pro Kaniko)
 - ✅ Keycloak realmy bootstrap (`ensure-keycloak-realm.sh`)
 - ✅ fake-buster + stock-trader-grabit: **Synced / Healthy**
 

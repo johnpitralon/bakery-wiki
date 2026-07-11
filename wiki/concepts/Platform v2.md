@@ -3,7 +3,7 @@ title: Platform v2
 type: concept
 tags: [architecture, migration, kytary-style]
 created: 2026-07-08
-updated: 2026-07-08
+updated: 2026-07-10
 ---
 
 Rozdělení monolitické platformy [[entities/service-bakery]] do čtyř rolí — analogie k Kytary stacku (Infrastructure + GitOps + Onboarding + app repa).
@@ -35,6 +35,10 @@ Oba pilotní app repa na `kind-desktop` vedle Kytary stacku:
 Sdílená infra: CNPG, Keycloak, Traefik, Argo CD. Bakery-owned: Kafka v `infra/kafka`.
 
 Runbook: `bakery-platform/docs/pilot-runbook.md` (včetně hranic scope s Kytary).
+
+## Produkce (Hetzner) — skeleton ⬜
+
+Remote cluster `hetzner-prod`, branch `main`, placeholdery `CHANGE_ME`. Viz [[concepts/Hetzner prod skeleton]] a `bakery-platform/docs/hetzner-prod-runbook.md`.
 
 ## Souvislosti
 

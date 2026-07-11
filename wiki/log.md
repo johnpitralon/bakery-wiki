@@ -165,3 +165,29 @@ Aktualizováno: [[entities/stock-trader-grabit]], tento log.
 - ⬜ Úloha 7: PR CI + smoke v clusteru po merge
 
 Aktualizováno: [[entities/stock-trader-grabit]], tento log.
+
+## [2026-07-10] infra | Kind registry — persist + in-cluster DNS
+
+- ✅ Host `kind-registry` s bind mount `~/docker-persistent/worker1/registry` (Kytary worker1 layout)
+- ✅ Skript `ensure-kind-registry-host.sh` (migrace z Docker volume přes `docker cp`)
+- ✅ GitOps `infra/registry/`: `fake-buster-registry`, `stock-trader-grabit-registry` → `host.docker.internal:5001`
+- ✅ Ověřeno z podu: DNS + `/v2/` OK v NS `stock-trader-grabit`
+
+Aktualizováno: [[entities/bakery-platform]], [[entities/bakery-gitops]], [[concepts/Koexistence s Kytary]], tento log.
+
+## [2026-07-10] infra | Hetzner prod skeleton
+
+- ⬜ GitOps `clusters/hetzner-prod/` — ApplicationSet `bakery-apps-hetzner-prod`, branch `main`
+- ⬜ `values-hetzner-prod.yaml` pro fake-buster a stock-trader-grabit (placeholdery)
+- ⬜ App profily `deploy/clusters/hetzner-prod/` v obou app repách
+- ⬜ Runbook `bakery-platform/docs/hetzner-prod-runbook.md`
+
+Aktualizováno: [[concepts/Hetzner prod skeleton]], [[entities/bakery-gitops]], [[concepts/Platform v2]], [[index]], tento log.
+
+## [2026-07-10] infra | Pod cleanup CronJob
+
+- ✅ `infra/pod-cleanup/` — CronJob `bakery-pod-cleanup` každých 30 min (Succeeded + Failed/Evicted)
+- ✅ ClusterRole + SA v `bakery-agent-infra`
+- ✅ Pilot runbook — automatický cleanup dokumentován
+
+Aktualizováno: [[entities/bakery-gitops]], [[concepts/Koexistence s Kytary]], tento log.

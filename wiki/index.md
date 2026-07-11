@@ -3,7 +3,7 @@ title: Index
 type: overview
 tags: [index, meta]
 created: 2026-07-08
-updated: 2026-07-08
+updated: 2026-07-10
 ---
 
 Katalog stránek wiki. LLM čte tento soubor jako první při dotazech.
@@ -29,6 +29,7 @@ Katalog stránek wiki. LLM čte tento soubor jako první při dotazech.
 | Stránka | Popis |
 |---------|-------|
 | [[concepts/Platform v2]] | Rozdělení platformy na 4+ repozitáře (Kytary-style) |
+| [[concepts/Hetzner prod skeleton]] | Prod cluster `hetzner-prod` — skeleton, branch `main`, `CHANGE_ME` |
 | [[concepts/GitOps workflow]] | Argo CD, bakery-gitops-root, app Applications |
 | [[concepts/Service onboarding]] | bakery-onboarding pipeline a artefakty |
 | [[concepts/Koexistence s Kytary]] | Kind `kind-desktop`, sdílený `infrastructure` NS, **scope hranice** |
