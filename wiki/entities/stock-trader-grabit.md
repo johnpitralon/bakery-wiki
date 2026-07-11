@@ -31,7 +31,7 @@ Argo Application `stock-trader-grabit`: **Synced / Healthy**.
 - ✅ **Plan 2** — hygiena repa, Platform v2 docs, Node 20, demo credentials flag (`7871cea`, `433fe20`, `b738b4e`); gitops `NEXT_PUBLIC_SHOW_DEMO_CREDENTIALS=true` pro lokální pilot
 - ✅ **Plan 3** — pin SHA tagů v gitops, CI IMAGE_TAG z HEAD, PR checks workflow (`.github/workflows/pr-checks.yml`)
 - 🔄 **Plan 4** — TickerQueryService + TickerImportService extrakce, config hardening, trading tests (zbývá CompanyInfo/PriceHistory/Earnings)
-- 🔄 **Plán 5** — frontend-st Jest ✅, Next.js 14.2 ✅, iOS Keycloak auth ✅, iOS testy/logging/config 🔄 (commit čeká)
+- 🔄 **Plán 5** — frontend-st Jest ✅, Next.js 15 ✅, iOS Keycloak auth ✅, iOS testy/logging/config ✅ (xcodebuild test čeká na plné Xcode)
 
 ## Platform v2 migrace (hotovo)
 

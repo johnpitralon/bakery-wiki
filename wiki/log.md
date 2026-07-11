@@ -221,3 +221,11 @@ Aktualizováno: [[entities/stock-trader-grabit]], tento log.
 - ⬜ `xcodebuild test` — blokováno bez plného Xcode; commit lokálně připraven
 
 Aktualizováno: [[entities/stock-trader-grabit]], tento log.
+
+## [2026-07-11] stock-trader-grabit | Plán 5 Úloha 2 — Next.js 15 upgrade
+
+- ✅ `grabit-web` + `frontend-st`: Next `14.2.35` → **15.5.20**
+- ✅ Jest (61 + 3 testů) a `npm run build` OK v obou appkách
+- ✅ `auth-proxy` route už měla async `params` (Next 15 ready)
+
+Aktualizováno: [[entities/stock-trader-grabit]], tento log.
