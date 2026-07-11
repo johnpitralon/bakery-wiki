@@ -3,7 +3,7 @@ title: stock-trader-grabit
 type: entity
 tags: [repo, app, pilot, trading]
 created: 2026-07-08
-updated: 2026-07-10
+updated: 2026-07-11
 sources: [stock-trader-grabit dev, bakery-platform dev, bakery-gitops dev]
 ---
 
@@ -31,7 +31,7 @@ Argo Application `stock-trader-grabit`: **Synced / Healthy**.
 - ✅ **Plan 2** — hygiena repa, Platform v2 docs, Node 20, demo credentials flag (`7871cea`, `433fe20`, `b738b4e`); gitops `NEXT_PUBLIC_SHOW_DEMO_CREDENTIALS=true` pro lokální pilot
 - ✅ **Plan 3** — pin SHA tagů v gitops, CI IMAGE_TAG z HEAD, PR checks workflow (`.github/workflows/pr-checks.yml`)
 - 🔄 **Plan 4** — TickerQueryService + TickerImportService extrakce, config hardening, trading tests (zbývá CompanyInfo/PriceHistory/Earnings)
-- ⬜ **Plán 5** — viz `docs/plans/README.md` v app repu
+- 🔄 **Plán 5** — frontend-st Jest ✅, Next.js 14.2 ✅, iOS Keycloak auth ✅, iOS testy/logging/config 🔄 (commit čeká)
 
 ## Platform v2 migrace (hotovo)
 
@@ -81,6 +81,17 @@ God class `TickerService` rozdělen na doménové služby v `service/ticker/` �
 | `EarningsService` | earnings calendar, reported-earnings job |
 
 `TickerService` ~1100 řádků (dříve ~4470); zbývá price update joby + international price v fasádě.
+
+## iOS GrabIt (Plán 5, 2026-07-11)
+
+| Oblast | Stav |
+|--------|------|
+| Keycloak auth + token refresh | ✅ Úloha 3 |
+| `APIClient` failable init + `APIClientFactory` fallback | ✅ Úloha 4 |
+| `AppLog` (`os.Logger`) místo `print()` | ✅ Úloha 4 |
+| `Info.plist` — `AuthAPIURL`, `StockTraderAPIURL`, `KeycloakRealm` | ✅ Úloha 4 |
+| Unit testy `GrabItTests` (APIClient, AuthService, TokenStorage) | ✅ připraveno; `xcodebuild test` vyžaduje plné Xcode |
+| Simulátor defaults | Keycloak `http://localhost:30084`, API `https://stock-trader.localhost` |
 
 ## Souvislosti
 

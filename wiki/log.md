@@ -210,3 +210,14 @@ Aktualizováno: [[entities/stock-trader-grabit]], tento log.
 - Commit `ebe1ee0` na `dev`
 
 Aktualizováno: [[entities/stock-trader-grabit]], tento log.
+
+## [2026-07-11] stock-trader-grabit | Plán 5 Úloha 4 — iOS testy, logging, config
+
+- ✅ `GrabItTests` target v `project.yml` + `project.pbxproj` + Xcode scheme
+- ✅ `APIClient` — `init?`, `APIURLResolver`, `APIClientFactory` s fallback URL
+- ✅ `AppLog` — strukturované logování (`api`, `auth`, `config`, `websocket`, `ui`)
+- ✅ `Config` — URL z `Info.plist` (simulátor: `:30084` + `stock-trader.localhost`)
+- ✅ Unit testy: `APIClientTests`, `AuthServiceTests`
+- ⬜ `xcodebuild test` — blokováno bez plného Xcode; commit lokálně připraven
+
+Aktualizováno: [[entities/stock-trader-grabit]], tento log.
