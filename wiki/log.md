@@ -229,3 +229,11 @@ Aktualizováno: [[entities/stock-trader-grabit]], tento log.
 - ✅ `auth-proxy` route už měla async `params` (Next 15 ready)
 
 Aktualizováno: [[entities/stock-trader-grabit]], tento log.
+
+## [2026-07-11] stock-trader-grabit | portfolio 500 fix + CI deploy 4808c25
+
+- ✅ `TradingService.getPortfolio` — writable tx (readOnly blokoval bootstrap účtu), null-safe `isDemoMode`
+- ✅ Commity `43644ad`, `4808c25` na `dev`
+- ✅ CI build všech 3 služeb, gitops `b701745`, cluster **Synced/Healthy** na tagu `4808c25`
+
+Aktualizováno: [[entities/stock-trader-grabit]], tento log.

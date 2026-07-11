@@ -31,7 +31,7 @@ Argo Application `stock-trader-grabit`: **Synced / Healthy**.
 - ✅ **Plan 2** — hygiena repa, Platform v2 docs, Node 20, demo credentials flag (`7871cea`, `433fe20`, `b738b4e`); gitops `NEXT_PUBLIC_SHOW_DEMO_CREDENTIALS=true` pro lokální pilot
 - ✅ **Plan 3** — pin SHA tagů v gitops, CI IMAGE_TAG z HEAD, PR checks workflow (`.github/workflows/pr-checks.yml`)
 - 🔄 **Plan 4** — TickerQueryService + TickerImportService extrakce, config hardening, trading tests (zbývá CompanyInfo/PriceHistory/Earnings)
-- 🔄 **Plán 5** — frontend-st Jest ✅, Next.js 15 ✅, iOS Keycloak auth ✅, iOS testy/logging/config ✅ (xcodebuild test čeká na plné Xcode)
+- ✅ **Plán 5** — frontend-st Jest, Next.js 15, iOS Keycloak auth, iOS testy/logging/config (xcodebuild test čeká na plné Xcode)
 
 ## Platform v2 migrace (hotovo)
 
@@ -92,6 +92,13 @@ God class `TickerService` rozdělen na doménové služby v `service/ticker/` �
 | `Info.plist` — `AuthAPIURL`, `StockTraderAPIURL`, `KeycloakRealm` | ✅ Úloha 4 |
 | Unit testy `GrabItTests` (APIClient, AuthService, TokenStorage) | ✅ připraveno; `xcodebuild test` vyžaduje plné Xcode |
 | Simulátor defaults | Keycloak `http://localhost:30084`, API `https://stock-trader.localhost` |
+
+## Otevřené body (mimo Plán 5)
+
+- ✅ Portfolio `/api/trading/portfolio` 500 — fix `TradingService` (`43644ad`, `4808c25`), nasazeno v clusteru (`gitops` `b701745`)
+- `xcodebuild test` (iOS) — vyžaduje plné Xcode
+- bakery-platform PR #13 — merge čeká na approval
+- Plán 4 backend refactoring — rozpracovaný
 
 ## Souvislosti
 
