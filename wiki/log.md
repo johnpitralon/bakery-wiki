@@ -200,3 +200,13 @@ Aktualizováno: [[entities/bakery-gitops]], [[concepts/Koexistence s Kytary]], t
 - Commit `538905e` na `dev`
 
 Aktualizováno: [[entities/stock-trader-grabit]], tento log.
+
+## [2026-07-11] stock-trader-grabit | Plán 5 Úloha 3 — iOS Keycloak auth
+
+- ✅ `AuthService` — password + refresh grant na Keycloak (`client_id: frontend`)
+- ✅ `APIClient` — form POST, proactive refresh (<60s), 401 retry
+- ✅ `TokenStorage` + JWT role/username z access tokenu
+- ✅ Config Keycloak NodePort `:30084` (dříve chybně `:30082` = Grafana)
+- Commit `ebe1ee0` na `dev`
+
+Aktualizováno: [[entities/stock-trader-grabit]], tento log.
