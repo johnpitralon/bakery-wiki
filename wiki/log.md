@@ -191,3 +191,12 @@ Aktualizováno: [[concepts/Hetzner prod skeleton]], [[entities/bakery-gitops]], 
 - ✅ Pilot runbook — automatický cleanup dokumentován
 
 Aktualizováno: [[entities/bakery-gitops]], [[concepts/Koexistence s Kytary]], tento log.
+
+## [2026-07-11] stock-trader-grabit | Plán 5 Úloha 1 — frontend-st Jest
+
+- ✅ Jest + Testing Library setup (vzor grabit-web)
+- ✅ Smoke testy login + dashboard (3 testy PASS)
+- ✅ PR CI `frontend-st-build` — `npx jest --ci` před buildem
+- Commit `538905e` na `dev`
+
+Aktualizováno: [[entities/stock-trader-grabit]], tento log.
