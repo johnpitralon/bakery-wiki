@@ -294,3 +294,12 @@ Aktualizováno: [[entities/bakery-gitops]], [[entities/bakery-platform]], tento 
 - ✅ Mergnuto do `dev`: fake-buster #20, stock-trader-grabit #65, bakery-platform #20, bakery-gitops přímo
 
 Aktualizováno: tento log.
+
+## [2026-07-12] ingress | Backend API přes frontend proxy, BE ingress vypnutý
+
+- ✅ **fake-buster** — `/api/labeler-proxy`, `/api/inference-proxy`; alias `labeler/inference/db-writer.localhost` → `frontend.localhost`
+- ✅ **stock-trader-grabit** — `/api/stock-trader-proxy` na frontend-st a grabit-web; `stock-trader.localhost` → frontend-st
+- ✅ **bakery-platform** — `ingress.additionalHosts` v IngressRoute
+- ✅ **bakery-gitops** — vypnutý veřejný ingress BE služeb, internal `*_SERVICE_URL` pro proxy
+
+Aktualizováno: [[entities/fake-buster]], [[entities/stock-trader-grabit]], tento log.
