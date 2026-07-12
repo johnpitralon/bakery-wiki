@@ -30,12 +30,14 @@ Repozitář **infrastrukturního bootstrapu** Platform v2 — náhrada části [
 | `scripts/utils/ensure-kind-registry-host.sh` | Host Docker `kind-registry` + persist `~/docker-persistent/worker1/registry` |
 | `scripts/utils/configure-kind-registry.sh` | Kind containerd pro registry pull |
 | `docs/pilot-runbook.md` | Pilot runbook včetně scope hranic s Kytary |
+| `scripts/kind-host-disk-maintenance.sh` | Docker disk prune + kubectl cleanup (Kind pilot) |
 | `templates/githooks/` | Kytary-style git hooky |
 
 ## CI / vývoj
 
 - `.github/workflows/ci.yml` — helm lint, bash syntax
 - `task hooks` / `task hooks-all` — githooks do platform + gitops + onboarding + **multi-agent** + wiki
+- `task kind-disk-maintenance` — pravidelná údržba Docker disku + evicted/failed podů na Kind
 - `ci-build-from-catalog.sh --bump-gitops` — build + auto tag bump
 
 ## Bootstrap pořadí

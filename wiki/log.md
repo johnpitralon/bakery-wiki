@@ -254,3 +254,15 @@ Aktualizováno: [[entities/bakery-platform]], tento log.
 - ✅ stock-trader-grabit githooks PR [#60](https://github.com/johnpitralon/stock-trader-grabit/pull/60)
 
 Aktualizováno: [[entities/fake-buster]], tento log.
+
+## [2026-07-12] kind-desktop | Trvalá mitigace DiskPressure
+
+Incident: všechny 4 nody `DiskPressure` → masové **Evicted** pody (promtail na control-plane, argocd-repo-server). Recovery ~6 min po uvolnění Docker build cache.
+
+**Trvalé opatření (nasazeno + na `dev`):**
+
+- ✅ `bakery-gitops` `9885911`: Promtail workers-only, `monitoring-maintenance` CronJob (15 min), `bakery-pod-cleanup` každých 10 min
+- ✅ `bakery-platform` PR [#18](https://github.com/johnpitralon/bakery-platform/pull/18): `task kind-disk-maintenance`, runbook
+- ✅ Live cluster: 3× promtail na workerech, žádný na control-plane; `DiskPressure: False`
+
+Aktualizováno: [[entities/bakery-gitops]], [[entities/bakery-platform]], tento log.

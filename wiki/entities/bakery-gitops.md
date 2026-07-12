@@ -3,7 +3,7 @@ title: bakery-gitops
 type: entity
 tags: [repo, gitops, argocd, applicationset]
 created: 2026-07-08
-updated: 2026-07-10
+updated: 2026-07-12
 ---
 
 **GitOps** repozitář pro Bakery — odpovídá **Kytary.GitOps**. Argo CD root app syncuje tento repozitář; aplikace řídí **ApplicationSet**.
@@ -34,7 +34,8 @@ infra/fake-buster-db/        # CNPG db-init
 infra/stock-trader-grabit-db/
 infra/kafka/                 # Kafka StatefulSet + Service
 infra/registry/              # ExternalName → host kind-registry (:5001) — pilot only
-infra/pod-cleanup/           # CronJob — Succeeded/Failed pody (každých 30 min)
+infra/monitoring/            # Prometheus/Loki/Grafana overlay + blackbox probes + disk-pressure mitigations
+infra/pod-cleanup/           # CronJob — Succeeded/Failed pody (každých 10 min)
 apps-registry.json
 ```
 
@@ -53,6 +54,20 @@ apps-registry.json
 - Argo: `bakery-gitops-root`, `fake-buster`, `stock-trader-grabit`, `bakery-onboarding` — **Synced / Healthy**
 - Kafka: `bootstrapServers: kafka.infrastructure.svc.cluster.local:9092` v obou app values
 - Keycloak URL: `https://keycloak.local.k8s.kytary.cz` + per-app realmy
+
+## Monitoring overlay (Kytary `monitoring` NS)
+
+`infra/monitoring/` — bakery scrape jobs, Grafana dashboardy, blackbox HTTP probes pro fronty.
+
+**Kind DiskPressure mitigace** (2026-07-12):
+
+| Artefakt | Účel |
+|----------|------|
+| `promtail-workers-only-patch.yaml` | Promtail jen na workerech (ne control-plane) |
+| `monitoring-maintenance-cronjob.yaml` | Každých 15 min: udrží patch + smaže Failed pody v `monitoring` |
+| `infra/pod-cleanup` | `bakery-pod-cleanup` každých **10 min** cluster-wide |
+
+Host údržba: `task kind-disk-maintenance` v [[entities/bakery-platform]].
 
 ## Prod skeleton (2026-07-10) ⬜
 
