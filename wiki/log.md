@@ -267,6 +267,15 @@ Incident: všechny 4 nody `DiskPressure` → masové **Evicted** pody (promtail 
 
 Aktualizováno: [[entities/bakery-gitops]], [[entities/bakery-platform]], tento log.
 
+## [2026-07-12] GUI split | Tři frontendy — fake-buster / frontend-st / grabit-web
+
+- ✅ **fake-buster** `frontend.localhost` — pouze ML (Dashboard, Label, Training, Crawler Admin, Users); odstraněn Stock Trader UI
+- ✅ **frontend-st** — launcher + `/stock-trader/*` admin (jediná kopie Stock Trader GUI)
+- ✅ **grabit-web** — trading; Profil → odkaz na frontend-st
+- ✅ Cross-link env: `NEXT_PUBLIC_FRONTEND_ST_URL`, redirects `/stock-trader` z fake-buster
+- ✅ Dokumentace: `fake-buster/docs/frontend-split-and-monitoring.md`
+- Aktualizováno: [[entities/fake-buster]], [[entities/stock-trader-grabit]], gitops env
+
 ## [2026-07-12] monitoring | Crawler batch monitoring + chart env fix
 
 - ✅ `kube-state-metrics` v `monitoring` (CronJob/Job metriky pro `fake-buster-crawler`)

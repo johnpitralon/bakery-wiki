@@ -9,6 +9,18 @@ sources: [platform-v2-pilot-snapshot-2026-07-08.md]
 
 Pilotní **aplikační** repozitář pro Platform v2 — detekce fake news (labeler, inference, db-writer, crawler, frontend).
 
+## Frontend (GUI split)
+
+Tři samostatné Next.js aplikace — viz `fake-buster/docs/frontend-split-and-monitoring.md`:
+
+| Host | Účel |
+|------|------|
+| `frontend.localhost` | ML labeling, crawler admin, users |
+| `frontend-st.localhost` | Stock Trader admin launcher |
+| `grabit-web.localhost` | Obchodování |
+
+Stock Trader admin **není** ve fake-buster frontendu (redirect na frontend-st).
+
 ## Repozitář
 
 - **URL**: https://github.com/johnpitralon/fake-buster

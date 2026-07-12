@@ -3,7 +3,7 @@ title: stock-trader-grabit
 type: entity
 tags: [repo, app, pilot, trading]
 created: 2026-07-08
-updated: 2026-07-11
+updated: 2026-07-12
 sources: [stock-trader-grabit dev, bakery-platform dev, bakery-gitops dev]
 ---
 
@@ -20,8 +20,10 @@ sources: [stock-trader-grabit dev, bakery-platform dev, bakery-gitops dev]
 | Služba | Typ | Stav |
 |--------|-----|------|
 | stock-trader | Java (WebFlux) | ✅ Running |
-| grabit-web | React (Next.js) | ✅ Running |
-| frontend-st | React (Next.js) | ✅ Running |
+| frontend-st | React (Next.js) | ✅ Running — launcher + `/stock-trader/*` admin |
+| grabit-web | React (Next.js) | ✅ Running — trading UI; Profil → odkaz na frontend-st |
+
+**GUI split (2026-07-12):** Stock Trader admin pouze ve frontend-st; fake-buster frontend = ML only. Cross-linky `NEXT_PUBLIC_FRONTEND_ST_URL` / `NEXT_PUBLIC_GRABIT_WEB_URL`.
 
 Argo Application `stock-trader-grabit`: **Synced / Healthy**.
 
