@@ -26,10 +26,10 @@ Všechny **Docker image tagy** a **CI toolchain verze** žijí v `bakery-platfor
 ## Maven / Spring (pilot)
 
 - Maven image: `maven:3.9.12-eclipse-temurin-25`
-- Spring Boot parent (scaffold + fake_buster parent): `4.0.7`
+- Spring Boot parent (scaffold + fake-buster parent): `4.0.7`
 - Java: `25`
 
 ## Souvislosti
 
 - [[entities/bakery-platform]]
-- [[entities/fake_buster]]
+- [[entities/fake-buster]]

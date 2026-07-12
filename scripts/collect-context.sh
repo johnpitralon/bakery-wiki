@@ -8,7 +8,7 @@ DATE="$(date +%Y-%m-%d)"
 TIME="$(date +%H:%M)"
 OUT="$ROOT/raw/auto-snapshot-latest.md"
 
-repos=(bakery-platform bakery-gitops bakery-onboarding bakery-wiki fake_buster service-bakery)
+repos=(bakery-platform bakery-gitops bakery-onboarding bakery-wiki fake-buster service-bakery)
 
 {
   echo "# Auto snapshot — ${DATE} ${TIME}"

@@ -54,7 +54,7 @@ Detail: `bakery-platform/docs/pilot-runbook.md` (sekce *Sdílený cluster — hr
 
 ## Souvislosti
 
-- [[entities/fake_buster]]
+- [[entities/fake-buster]]
 - [[entities/stock-trader-grabit]]
 - [[overview]]
 - [[concepts/GitOps workflow]]

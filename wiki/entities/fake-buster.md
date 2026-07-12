@@ -1,9 +1,9 @@
 ---
-title: fake_buster
+title: fake-buster
 type: entity
 tags: [repo, app, pilot, ml]
 created: 2026-07-08
-updated: 2026-07-08
+updated: 2026-07-12
 sources: [platform-v2-pilot-snapshot-2026-07-08.md]
 ---
 
@@ -11,7 +11,8 @@ Pilotní **aplikační** repozitář pro Platform v2 — detekce fake news (labe
 
 ## Repozitář
 
-- **Local clone**: `<workspace>/fake_buster`
+- **URL**: https://github.com/johnpitralon/fake-buster
+- **Local clone**: `<workspace>/fake-buster`
 - **Default branch**: `dev`
 - **Deploy**: GitOps — legacy `./deploy/run-bootstrap.sh` **DEPRECATED**
 

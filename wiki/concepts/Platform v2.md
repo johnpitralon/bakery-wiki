@@ -15,7 +15,7 @@ Rozdělení monolitické platformy [[entities/service-bakery]] do čtyř rolí �
 | Kytary.K8S.Infrastructure | [[entities/bakery-platform]] |
 | Kytary.GitOps | [[entities/bakery-gitops]] |
 | Kytary.Onboarding | [[entities/bakery-onboarding]] |
-| StockBass / app repa | `fake_buster`, `stock-trader-grabit`, … |
+| StockBass / app repa | `fake-buster`, `stock-trader-grabit`, … |
 
 ## Principy
 
@@ -29,7 +29,7 @@ Rozdělení monolitické platformy [[entities/service-bakery]] do čtyř rolí �
 
 Oba pilotní app repa na `kind-desktop` vedle Kytary stacku:
 
-- [[entities/fake_buster]] — ML fake news pipeline
+- [[entities/fake-buster]] — ML fake news pipeline
 - [[entities/stock-trader-grabit]] — trading + GrabIt Web
 
 Sdílená infra: CNPG, Keycloak, Traefik, Argo CD. Bakery-owned: Kafka v `infra/kafka`.

@@ -64,5 +64,5 @@ apps-registry.json
 
 - [[concepts/GitOps workflow]]
 - [[entities/bakery-platform]]
-- [[entities/fake_buster]]
+- [[entities/fake-buster]]
 - [[entities/stock-trader-grabit]]

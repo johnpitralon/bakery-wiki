@@ -14,7 +14,7 @@ updated: 2026-07-08
 |---------|----------|
 | Nový rep / služba / koncept | entity nebo concept stránka |
 | Změna deploy modelu, Argo, CI | [[concepts/GitOps workflow]], entity rep |
-| Pilot / cluster stav | [[overview]], [[entities/fake_buster]], [[log]] |
+| Pilot / cluster stav | [[overview]], [[entities/fake-buster]], [[log]] |
 | Onboarding / MCP / LLM integrace | [[concepts/Service onboarding]], [[entities/bakery-onboarding]] |
 | Rozhodnutí (proč, ne jen co) | příslušný concept + append [[log]] |
 

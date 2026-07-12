@@ -17,7 +17,7 @@ updated: 2026-07-08
 | [[entities/bakery-gitops]] | GitOps + ApplicationSet |
 | [[entities/bakery-onboarding]] | Onboard API (OWUI + MCP) |
 | [[entities/bakery-wiki]] | LLM wiki — [[concepts/Wiki sync policy]] |
-| [[entities/fake_buster]] | Pilotní app #1 (ML) |
+| [[entities/fake-buster]] | Pilotní app #1 (ML) |
 | [[entities/stock-trader-grabit]] | Pilotní app #2 (trading) |
 
 ## Pilot kind-desktop (2026-07-08) — ✅ hotovo

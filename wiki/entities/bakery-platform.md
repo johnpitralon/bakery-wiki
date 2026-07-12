@@ -3,7 +3,7 @@ title: bakery-platform
 type: entity
 tags: [repo, platform, bootstrap, helm, ci, githooks]
 created: 2026-07-08
-updated: 2026-07-10
+updated: 2026-07-12
 ---
 
 Repozitář **infrastrukturního bootstrapu** Platform v2 — náhrada části [[entities/service-bakery]]. Role **Kytary.K8S.Infrastructure**.
@@ -35,7 +35,7 @@ Repozitář **infrastrukturního bootstrapu** Platform v2 — náhrada části [
 ## CI / vývoj
 
 - `.github/workflows/ci.yml` — helm lint, bash syntax
-- `task hooks-all` — githooks do platform + gitops + onboarding
+- `task hooks` / `task hooks-all` — githooks do platform + gitops + onboarding + **multi-agent** + wiki
 - `ci-build-from-catalog.sh --bump-gitops` — build + auto tag bump
 
 ## Bootstrap pořadí

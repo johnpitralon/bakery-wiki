@@ -5,7 +5,7 @@
 
 ## Project context
 
-**Bakery** is a generic Kubernetes platform for deploying microservice apps (fake_buster, stock-trader-grabit, …). Platform v2 splits the monolithic **service-bakery** into:
+**Bakery** is a generic Kubernetes platform for deploying microservice apps (fake-buster, stock-trader-grabit, …). Platform v2 splits the monolithic **service-bakery** into:
 
 | Repo | Role |
 |------|------|
@@ -15,7 +15,7 @@
 | **bakery-wiki** | Obsidian + LLM wiki |
 | **App repos** | Application code + `service-bakery.yaml` + `deploy/clusters/` |
 
-Pilot: **fake_buster** on Kind cluster `kind-desktop` coexisting with **Kytary** stack (`infrastructure` namespace).
+Pilot: **fake-buster** on Kind cluster `kind-desktop` coexisting with **Kytary** stack (`infrastructure` namespace).
 
 ## Directory structure
 
@@ -60,7 +60,7 @@ updated: YYYY-MM-DD
 ### Linking
 
 - Use Obsidian wiki links: `[[Page Name]]` or `[[path/to/page|Display Text]]`
-- Entity names: match repo names (`bakery-platform`, `fake_buster`)
+- Entity names: match repo names (`bakery-platform`, `fake-buster`)
 
 ### Language
 
@@ -88,7 +88,7 @@ task wiki:local               # fallback: API bundle + apply
 | bakery-onboarding | Service onboarding API | ✅ Pilot |
 | bakery-wiki | LLM-maintained Obsidian wiki | ✅ Active |
 | service-bakery | Legacy monolith platform | 🔄 Migrating away |
-| fake_buster | App (ML fake news) | ✅ Pilot on kind-desktop |
+| fake-buster | App (ML fake news) | ✅ Pilot on kind-desktop |
 | stock-trader-grabit | App (trading) | ✅ Pilot on v2 |
 
 ## Important rules

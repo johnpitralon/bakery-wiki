@@ -21,7 +21,7 @@ Shrnutí zdroje `raw/platform-v2-pilot-snapshot-2026-07-08.md` — počáteční
 
 Tento zdroj inicializoval / aktualizoval:
 - [[overview]]
-- [[entities/fake_buster]]
+- [[entities/fake-buster]]
 - [[entities/bakery-platform]]
 - [[entities/bakery-gitops]]
 - [[entities/bakery-onboarding]]

@@ -21,7 +21,7 @@ Katalog stránek wiki. LLM čte tento soubor jako první při dotazech.
 | [[entities/bakery-onboarding]] | Go HTTP `/v1/onboard` — scaffold + gitops registrace |
 | [[entities/bakery-wiki]] | Obsidian vault + LLM wiki (tento repozitář) |
 | [[entities/service-bakery]] | Legacy monolitická platforma (migrace pryč) |
-| [[entities/fake_buster]] | Pilotní app — labeler, inference, db-writer, frontend, crawler |
+| [[entities/fake-buster]] | Pilotní app — labeler, inference, db-writer, frontend, crawler |
 | [[entities/stock-trader-grabit]] | App — stock-trader, grabit-web, frontend-st (pilot v2) |
 
 ## Koncepty

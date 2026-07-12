@@ -3,7 +3,7 @@ title: Log
 type: overview
 tags: [log, meta]
 created: 2026-07-08
-updated: 2026-07-10
+updated: 2026-07-12
 ---
 
 Chronologický záznam aktivit wiki — ingest, query, lint, údržba.
@@ -13,7 +13,7 @@ Chronologický záznam aktivit wiki — ingest, query, lint, údržba.
 Vytvořeno repo **bakery-wiki** podle schématu Kytary.Wiki (Obsidian vault + `CLAUDE.md` schema + `raw/` + `wiki/`).
 
 Počáteční obsah:
-- Entity stránky pro Platform v2 repozitáře + `fake_buster` + legacy `service-bakery`
+- Entity stránky pro Platform v2 repozitáře + `fake-buster` + legacy `service-bakery`
 - Koncepty: Platform v2, GitOps, onboarding, koexistence s Kytary, image-versions
 - Guardy proti natvrdo zadaným cestám v `wiki/*.md` (`.githooks/pre-commit`, `.claude/hooks/`)
 
@@ -32,7 +32,7 @@ Pilotní nasazení (shrnutí pro wiki — detail v app/cluster stavu):
 - ✅ Legacy Argo `service-bakery` smazána
 - ✅ Default branch všech rep: **dev**
 
-Viz [[entities/fake_buster]], [[concepts/Koexistence s Kytary]].
+Viz [[entities/fake-buster]], [[concepts/Koexistence s Kytary]].
 
 ## [2026-07-08] ingest | Pilot snapshot + LLM trigger
 
@@ -76,7 +76,7 @@ Viz [[entities/fake_buster]], [[concepts/Koexistence s Kytary]].
 - **configure-kind-registry.sh:** upstream `kind-registry:5000`, fix `docker exec -i`
 - **CI E2E:** 5/5 služeb fake-buster build → registry; `fake-buster` Argo **Healthy**
 - **Větve:** všechny bakery rep — default **`dev`**, `main` = release
-- Aktualizováno: [[entities/fake_buster]], [[concepts/GitOps workflow]], pilot-runbook
+- Aktualizováno: [[entities/fake-buster]], [[concepts/GitOps workflow]], pilot-runbook
 
 ## [2026-07-08] auto-commit | Wiki commit/push po každém update
 
@@ -98,7 +98,7 @@ Pilot na `kind-desktop` — obě app **Synced / Healthy**:
 - ✅ **bakery-platform PR #12** — runbook scope + bump-gitops regex fix
 
 Aktualizováno: [[overview]], [[concepts/Platform v2]], [[concepts/Koexistence s Kytary]],
-[[entities/fake_buster]], [[entities/stock-trader-grabit]], [[entities/bakery-platform]],
+[[entities/fake-buster]], [[entities/stock-trader-grabit]], [[entities/bakery-platform]],
 [[entities/bakery-gitops]], [[entities/service-bakery]], [[index]], tento log.
 
 ## [2026-07-08] decommission | service-bakery repo smazán
@@ -237,3 +237,20 @@ Aktualizováno: [[entities/stock-trader-grabit]], tento log.
 - ✅ CI build všech 3 služeb, gitops `b701745`, cluster **Synced/Healthy** na tagu `4808c25`
 
 Aktualizováno: [[entities/stock-trader-grabit]], tento log.
+
+## [2026-07-12] bakery-platform | Kytary-style githooks pro multi-agent
+
+- ✅ `refresh-githooks.sh --all` rozšířeno o `bakery-multi-agent-platform` a `bakery-wiki`
+- ✅ `bakery-multi-agent-platform`: sync `.githooks/` (`local/<user>/<slug>` + auto PR), `task hooks`
+- ✅ PR [#14](https://github.com/johnpitralon/bakery-platform/pull/14), multi-agent PR [#1](https://github.com/johnpitralon/bakery-multi-agent-platform/pull/1)
+
+Aktualizováno: [[entities/bakery-platform]], tento log.
+
+## [2026-07-12] fake-buster | Přejmenování repozitáře + Kytary githooks
+
+- ✅ GitHub `johnpitralon/fake_buster` → **johnpitralon/fake-buster**
+- ✅ Lokální clone: `<workspace>/fake-buster` (dříve `fake_buster`)
+- ✅ Kytary-style `.githooks/` + `task hooks` (PR [#11](https://github.com/johnpitralon/fake-buster/pull/11))
+- ✅ stock-trader-grabit githooks PR [#60](https://github.com/johnpitralon/stock-trader-grabit/pull/60)
+
+Aktualizováno: [[entities/fake-buster]], tento log.
