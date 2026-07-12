@@ -266,3 +266,13 @@ Incident: všechny 4 nody `DiskPressure` → masové **Evicted** pody (promtail 
 - ✅ Live cluster: 3× promtail na workerech, žádný na control-plane; `DiskPressure: False`
 
 Aktualizováno: [[entities/bakery-gitops]], [[entities/bakery-platform]], tento log.
+
+## [2026-07-12] monitoring | Crawler batch monitoring + chart env fix
+
+- ✅ `kube-state-metrics` v `monitoring` (CronJob/Job metriky pro `fake-buster-crawler`)
+- ✅ Prometheus alert rules: `BakeryCrawlerJobFailed`, `BakeryCrawlerStale`, `BakeryCrawlerJobRunningTooLong`
+- ✅ Grafana dashboard `fake-buster-crawler` + panel v overview
+- ✅ `bakery-app` chart: crawler CronJob dostává DB/Kafka/Loki env (oprava padajících jobů)
+- ⬜ Argo sync `fake-buster` — aplikuje nový CronJob manifest s DB credentials
+
+Aktualizováno: [[entities/bakery-gitops]], [[entities/bakery-platform]], tento log.
