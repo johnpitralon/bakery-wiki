@@ -285,3 +285,12 @@ Aktualizováno: [[entities/bakery-gitops]], [[entities/bakery-platform]], tento 
 - ⬜ Argo sync `fake-buster` — aplikuje nový CronJob manifest s DB credentials
 
 Aktualizováno: [[entities/bakery-gitops]], [[entities/bakery-platform]], tento log.
+
+## [2026-07-12] fix | CORS stock-trader + Keycloak role mapping fake-buster
+
+- ✅ **stock-trader-grabit** — `APP_CORS_ALLOWED_ORIGINS` v gitops + `${CORS_ALLOWED_ORIGINS}` v Spring prod/dev; oprava Network Error z `frontend-st`
+- ✅ **bakery-platform** — chart injektuje `APP_CORS_ALLOWED_ORIGINS` vedle `CORS_ALLOWED_ORIGINS`
+- ✅ **fake-buster** — `mapKeycloakRole` filtruje `default-roles-fake-buster`; oprava visícího „Checking permissions…“
+- ✅ Mergnuto do `dev`: fake-buster #20, stock-trader-grabit #65, bakery-platform #20, bakery-gitops přímo
+
+Aktualizováno: tento log.
