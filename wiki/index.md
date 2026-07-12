@@ -3,7 +3,7 @@ title: Index
 type: overview
 tags: [index, meta]
 created: 2026-07-08
-updated: 2026-07-10
+updated: 2026-07-12
 ---
 
 Katalog stránek wiki. LLM čte tento soubor jako první při dotazech.
@@ -36,6 +36,7 @@ Katalog stránek wiki. LLM čte tento soubor jako první při dotazech.
 | [[concepts/Image versions]] | `image-versions.env` jako single source of truth |
 | [[concepts/LLM wiki maintenance]] | Trigger pro update wiki (libovolné LLM) |
 | [[concepts/Wiki sync policy]] | **Povinně** — wiki po každé platformní změně |
+| [[concepts/E2E smoke tests]] | Playwright smoke v app repech (`task e2e`) |
 
 ## Zdroje
 

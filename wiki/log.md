@@ -303,3 +303,18 @@ Aktualizováno: tento log.
 - ✅ **bakery-gitops** — vypnutý veřejný ingress BE služeb, internal `*_SERVICE_URL` pro proxy
 
 Aktualizováno: [[entities/fake-buster]], [[entities/stock-trader-grabit]], tento log.
+
+## [2026-07-12] test | Playwright E2E smoke v app repech
+
+- ✅ **fake-buster** — `e2e/` (proxy, shell, alias hosty, login); `task e2e`; `.github/workflows/e2e-smoke.yml` (workflow_dispatch)
+- ✅ **stock-trader-grabit** — `e2e/` (frontend-st, grabit-web, proxy, `stock-trader.localhost` alias); 9/9 testů proti pilotu
+- ✅ **bakery-wiki** — [[concepts/E2E smoke tests]]
+
+Aktualizováno: [[entities/fake-buster]], [[entities/stock-trader-grabit]], [[index]], tento log.
+
+## [2026-07-12] fix | frontend-st Keycloak token refresh (401 na Scheduled Jobs)
+
+- ✅ **stock-trader-grabit** PR #67 — `frontend-st` proaktivně obnovuje Keycloak JWT (5 min TTL) + retry na 401; oprava 401 na `/api/statistics/jobs` po idle
+- ✅ Mergnuto do `dev`: `c34a9b1`
+
+Aktualizováno: [[entities/stock-trader-grabit]], tento log.

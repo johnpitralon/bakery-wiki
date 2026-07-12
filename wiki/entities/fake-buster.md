@@ -9,17 +9,20 @@ sources: [platform-v2-pilot-snapshot-2026-07-08.md]
 
 Pilotní **aplikační** repozitář pro Platform v2 — detekce fake news (labeler, inference, db-writer, crawler, frontend).
 
-## Frontend (GUI split)
+## Frontend
 
-Tři samostatné Next.js aplikace — viz `fake-buster/docs/frontend-split-and-monitoring.md`:
+Jeden ML Next.js frontend — viz `fake-buster/docs/frontend-split-and-monitoring.md`:
 
 | Host | Účel |
 |------|------|
-| `frontend.localhost` | ML labeling, crawler admin, users |
-| `frontend-st.localhost` | Stock Trader admin launcher |
-| `grabit-web.localhost` | Obchodování |
+| `frontend.localhost` | ML labeling, crawler admin, monitoring |
+| `labeler.localhost` / `inference.localhost` | Ingress aliasy → stejný frontend |
 
-Stock Trader admin **není** ve fake-buster frontendu (redirect na frontend-st).
+Stock Trader / GrabIt UI jsou v [[entities/stock-trader-grabit]].
+
+## E2E smoke
+
+Playwright sada `e2e/` — `task e2e`. Viz [[concepts/E2E smoke tests]].
 
 ## Repozitář
 

@@ -27,6 +27,12 @@ sources: [stock-trader-grabit dev, bakery-platform dev, bakery-gitops dev]
 
 Argo Application `stock-trader-grabit`: **Synced / Healthy**.
 
+## E2E smoke
+
+Playwright sada `e2e/` (projekty `frontend-st`, `grabit-web`, `cross-host`) — `task e2e`. Viz [[concepts/E2E smoke tests]].
+
+**Auth (2026-07-12):** `frontend-st` obnovuje Keycloak access token (TTL 5 min) před expirací — stejný vzor jako grabit-web.
+
 ## Plány dotažení (2026-07)
 
 - ✅ **Plan 1** — grabit-web Trading/Markets + JWKS auth (`512bbbd`, `e21befc`)
