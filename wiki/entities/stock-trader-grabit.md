@@ -3,7 +3,7 @@ title: stock-trader-grabit
 type: entity
 tags: [repo, app, pilot, trading]
 created: 2026-07-08
-updated: 2026-07-12
+updated: 2026-07-13
 sources: [stock-trader-grabit dev, bakery-platform dev, bakery-gitops dev]
 ---
 
@@ -26,6 +26,15 @@ sources: [stock-trader-grabit dev, bakery-platform dev, bakery-gitops dev]
 **GUI split (2026-07-12):** Stock Trader admin pouze ve frontend-st; fake-buster frontend = ML only. Cross-linky `NEXT_PUBLIC_FRONTEND_ST_URL` / `NEXT_PUBLIC_GRABIT_WEB_URL`.
 
 Argo Application `stock-trader-grabit`: **Synced / Healthy**.
+
+## Lokální pilot — CPU fix (2026-07-13)
+
+Pod `stock-trader` žral **500m CPU** kvůli retry smyčkám: Massive WebSocket reconnect (~5 s) + Loki4j timeout stack trace.
+
+**Opravy:**
+- GitOps: `global.loki.enabled: false`, `STOCK_MULTI_PROVIDER_ENABLED=false`, `MASSIVE/FINNHUB_WEBSOCKET_AUTO_CONNECT=false`
+- Kód (`8abe7e7`): WS exponential backoff, Loki appenders jen pod Spring profile `loki`
+- Po deploy CPU ~80m idle (místo 500m limit)
 
 ## E2E smoke
 

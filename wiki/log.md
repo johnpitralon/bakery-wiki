@@ -318,3 +318,11 @@ Aktualizováno: [[entities/fake-buster]], [[entities/stock-trader-grabit]], [[in
 - ✅ Mergnuto do `dev`: `c34a9b1`
 
 Aktualizováno: [[entities/stock-trader-grabit]], tento log.
+
+## [2026-07-13] fix | stock-trader CPU burn (Massive WS + Loki retry loops)
+
+- ✅ **stock-trader-grabit** PR #72–#73 — WS backoff, Loki appenders jen pod profile `loki`, image `8abe7e7`
+- ✅ **bakery-gitops** — vypnutý Loki + multi-provider WS pro lokální pilot
+- ✅ **bakery-platform** — `SPRING_PROFILES_INCLUDE=loki` v `bakery-app.lokiEnv` (PR #22)
+
+Aktualizováno: [[entities/stock-trader-grabit]], tento log.
