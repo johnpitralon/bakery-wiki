@@ -3,7 +3,7 @@ title: Index
 type: overview
 tags: [index, meta]
 created: 2026-07-08
-updated: 2026-07-12
+updated: 2026-07-14
 ---
 
 Katalog stránek wiki. LLM čte tento soubor jako první při dotazech.
@@ -22,7 +22,7 @@ Katalog stránek wiki. LLM čte tento soubor jako první při dotazech.
 | [[entities/bakery-wiki]] | Obsidian vault + LLM wiki (tento repozitář) |
 | [[entities/service-bakery]] | Legacy monolitická platforma (migrace pryč) |
 | [[entities/fake-buster]] | Pilotní app — labeler, inference, db-writer, frontend, crawler |
-| [[entities/stock-trader-grabit]] | App — stock-trader, grabit-web, frontend-st (pilot v2) |
+| [[entities/stock-trader-grabit]] | App — stock-trader, grabit-web, frontend-st; typed instrument API, centrální product policy, web detail a bezpečný OrderTicket (pilot v2) |
 
 ## Koncepty
 
