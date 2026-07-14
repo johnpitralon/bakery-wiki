@@ -3,7 +3,7 @@ title: Log
 type: overview
 tags: [log, meta]
 created: 2026-07-08
-updated: 2026-07-12
+updated: 2026-07-14
 ---
 
 Chronologický záznam aktivit wiki — ingest, query, lint, údržba.
@@ -324,5 +324,54 @@ Aktualizováno: [[entities/stock-trader-grabit]], tento log.
 - ✅ **stock-trader-grabit** PR #72–#73 — WS backoff, Loki appenders jen pod profile `loki`, image `8abe7e7`
 - ✅ **bakery-gitops** — vypnutý Loki + multi-provider WS pro lokální pilot
 - ✅ **bakery-platform** — `SPRING_PROFILES_INCLUDE=loki` v `bakery-app.lokiEnv` (PR #22)
+
+Aktualizováno: [[entities/stock-trader-grabit]], tento log.
+
+## [2026-07-13] feat | Kind cluster pause/resume (bakery-platform)
+
+- ✅ `task kind-pause` / `task kind-resume` / `task kind-status` — docker stop/start Kind bez mazání dat
+- Dokumentace: `bakery-platform/docs/pilot-runbook.md` (PR #23)
+
+Aktualizováno: [[entities/bakery-platform]], tento log.
+
+## [2026-07-13] feat | GrabIt typed instrument overview API
+
+- ✅ **stock-trader-grabit** — nový autentizovaný `GET /api/instruments/{symbol}/overview` pro web/iOS
+- ✅ Typed immutable DTO nad `TickerEntity` + nejnovější dokončenou daily candle; jeden bar stačí, bez baru jsou history hodnoty `null`
+- ✅ Deterministická freshness (15 minut, budoucí timestamp `UNKNOWN`); bez autoritativního zdroje market status vždy `UNKNOWN` / `UNAVAILABLE`
+- ✅ Chyby `{error, message}` bez leaků a integračně ověřená autentizace `/api/**`
+- ✅ JPA lookup na `boundedElastic`, sanitizované error logování, contextual provider decimal parsing a override-friendly `Clock`
+- ✅ TDD: cílené testy 25/25, celý backend suite 178/178
+
+Aktualizováno: [[entities/stock-trader-grabit]], [[index]], tento log.
+
+## [2026-07-13] feat | GrabIt web instrument hub a bezpečný OrderTicket
+
+- ✅ `/instruments/[symbol]` — typed overview, daily-only Recharts graf, OHLCV tabulka, fundamentals/market metadata a pravdivé loading/404/error/partial/stale/empty stavy
+- ✅ Reusable dvoukrokový `OrderTicket` — BUY/SELL, MARKET/LIMIT, quantity/cash amount, skutečný fee, balance/position kontroly, confirm revalidation a duplicate-submit lock
+- ✅ `/trading?symbol=...` používá stejný ticket; odstraněny STOP, SL/TP a placeholder intraday chart
+- ✅ Centralizovaná product policy: STOCKS/ETFS/FOREX/INDICES/COMMODITIES + Bitcoin-only CRYPTO; nepodporované výsledky i order flow jsou blokované
+- ✅ `UNKNOWN` market vyžaduje explicitní acknowledgement, `CLOSED` blokuje přípravu a status se znovu ověřuje při confirmu
+- ✅ Strict plain-decimal validace (max. 8 míst), pravdivá okamžitá LIMIT simulace, `100R` místo falešného `MAX`
+- ✅ Confirm znovu aplikuje centralizovanou product policy a odmítne mezitím nepodporovaný instrument ještě před `createOrder`
+- ✅ Bezpečné backend message: strukturovaný `message` → `error`; plain-text/stack-like history body se nezobrazuje, chronologická daily data a solid chart styling bez gradientu
+- ✅ TDD + verifikace: Jest 130/130, TypeScript, Next production build a lint
+
+Aktualizováno: [[entities/stock-trader-grabit]], [[index]], tento log.
+
+## [2026-07-14] feat | GrabIt redesign — iOS instrument hub + produktové plochy
+
+- ✅ **iOS** — Markets → detail → trade flow; typed overview, product policy, fee-aware OrderEntry; design system tokeny
+- ✅ **Web produktové plochy** — Czech navigace (Domů/Objevovat/Obchodovat/Portfolio/Profil), dashboard z API, portfolio bez falešných statistik, deep-linky na detail
+- ✅ **Backend** — security test fix: `@DynamicPropertySource` pro HS256 v CI (host `JWT_SECRET` env)
+- ✅ Verifikace: Jest 130/130, backend suite PASS, Next build PASS; GitOps smoke po merge (login → discovery → detail → order → portfolio)
+
+Aktualizováno: [[entities/stock-trader-grabit]], tento log.
+
+## [2026-07-14] fix | Manuální joby stock-trader — GitOps deploy na kind-desktop
+
+- ✅ **GitOps** `bakery-gitops` commit `a2047e3`: `stock-trader:local-jobs-v2`, `frontend-st:local-jobs-e432e10`, `SPRING_PROFILES_ACTIVE=local`
+- ✅ **Argo** `stock-trader-grabit` Synced; POST job trigger s providerem **200** (dříve 403 CSRF)
+- ✅ Provider override funguje i bez Redis (in-memory fallback)
 
 Aktualizováno: [[entities/stock-trader-grabit]], tento log.
