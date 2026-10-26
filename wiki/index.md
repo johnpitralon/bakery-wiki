@@ -3,7 +3,7 @@ title: Index
 type: overview
 tags: [index, meta]
 created: 2026-07-08
-updated: 2026-07-14
+updated: 2026-10-26
 ---
 
 Katalog stránek wiki. LLM čte tento soubor jako první při dotazech.
@@ -17,7 +17,7 @@ Katalog stránek wiki. LLM čte tento soubor jako první při dotazech.
 | Stránka | Popis |
 |---------|-------|
 | [[entities/bakery-platform]] | Bootstrap, `bakery-app` chart, CI, `image-versions.env` |
-| [[entities/bakery-gitops]] | Argo CD root app, app manifests, infra skeleton |
+| [[entities/bakery-gitops]] | Argo CD root app, app manifests, infra skeleton; Kafka init chown fix + Argo/StatefulSet rollout gotcha (2026-10-26) |
 | [[entities/bakery-onboarding]] | Go HTTP `/v1/onboard` — scaffold + gitops registrace |
 | [[entities/bakery-wiki]] | Obsidian vault + LLM wiki (tento repozitář) |
 | [[entities/service-bakery]] | Legacy monolitická platforma (migrace pryč) |

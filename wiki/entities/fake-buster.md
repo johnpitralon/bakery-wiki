@@ -3,7 +3,7 @@ title: fake-buster
 type: entity
 tags: [repo, app, pilot, ml]
 created: 2026-07-08
-updated: 2026-07-12
+updated: 2026-10-26
 sources: [platform-v2-pilot-snapshot-2026-07-08.md]
 ---
 
@@ -57,6 +57,10 @@ Argo Application `fake-buster`: **Synced / Healthy**.
 - Registry: `localhost:5001` (node pull) / `host.docker.internal:5001` (Kaniko push)
 
 Login ověřen přes frontend auth-proxy.
+
+### Výpadek db-writer kvůli Kafce (2026-10-26)
+
+`fake-buster-db-writer` padal s `failed to dial … kafka.infrastructure.svc.cluster.local:9092`, protože `infrastructure/kafka-0` visel v `Init:CrashLoopBackOff` (init `chown` na macOS bind mountu kind PV). Po fixu `c72e431` v [[entities/bakery-gitops]] (best-effort chown + odblokování Argo operace + smazání `kafka-0`) běží db-writer od 15:24 CET a konzumuje topic `articles.raw` ✅. Detail a rollout gotcha: [[entities/bakery-gitops]], sekce „Kafka: init chown na kind bind mountu“.
 
 ## Souvislosti
 

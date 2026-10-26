@@ -3,7 +3,7 @@ title: Log
 type: overview
 tags: [log, meta]
 created: 2026-07-08
-updated: 2026-07-14
+updated: 2026-10-26
 ---
 
 Chronologický záznam aktivit wiki — ingest, query, lint, údržba.
@@ -375,3 +375,11 @@ Aktualizováno: [[entities/stock-trader-grabit]], tento log.
 - ✅ Provider override funguje i bez Redis (in-memory fallback)
 
 Aktualizováno: [[entities/stock-trader-grabit]], tento log.
+
+## [2026-10-26] fix | Kafka init chown na local kind (c72e431)
+
+- ✅ **GitOps** `bakery-gitops` commit `c72e431`: init kontejner `fix-data-permissions` v `infra/kafka/kafka-statefulset.yaml` má `chown`/`chmod` best-effort (PV je bind mount z macOS, root nesmí chown na uid 501)
+- ✅ `kafka-0` 1/1 Running po 305+ restartech; `fake-buster-db-writer` znovu konzumuje `articles.raw`
+- ⚠️ Rollout gotcha: Argo `bakery-gitops-root` měla zaseknutou sync operaci (čekání na healthy Kafku) → ukončit operaci patchem `phase: Terminating`; StatefulSet navíc nevyměnil rozbitý pod → `kubectl -n infrastructure delete pod kafka-0`
+
+Aktualizováno: [[entities/bakery-gitops]], [[entities/fake-buster]], [[index]], tento log.
