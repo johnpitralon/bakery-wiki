@@ -60,7 +60,7 @@ apps-registry.json
 Incident a fix v `infra/kafka/kafka-statefulset.yaml` (commit `c72e431`, `fix(kafka): chown v init kontejneru best-effort (kind bind mount z macOS)`).
 
 - **Příznak** (`kind-desktop`): `infrastructure/kafka-0` v `Init:CrashLoopBackOff`, 305+ restartů od 2026-10-25 10:34. Init kontejner `fix-data-permissions` (busybox:1.36, `runAsUser 0`) spouštěl `chown -R 1000:1000 /var/lib/kafka/data && chmod 755 ...` a padal na `chown: .../metadata/__cluster_metadata-0/*.checkpoint: Permission denied`.
-- **Příčina**: PV Kafky (storage class `standard`, hostPath `/persistent-data/pvc-…_infrastructure_kafka-data-kafka-0` na nodu `desktop-worker2`) je na lokálním kindu bind mount z macOS (`<macOS home>/docker-persistent/worker2`) přes Docker Desktop file sharing. Soubory patří macOS uid 501 a root v kontejneru je nesmí přeowner-ovat.
+- **Příčina**: PV Kafky (storage class `standard`, hostPath `/persistent-data/pvc-…_infrastructure_kafka-data-kafka-0` na nodu `desktop-worker2`) je na lokálním kindu bind mount z macOS (`<macOS home>/docker-persistent/worker2`) přes Docker Desktop file sharing. Soubory patří macOS uid 501 a root v kontejneru nesmí změnit vlastníka souborů.
 - **Fix**: `chown` i `chmod` jsou best-effort (`chown … 2>/dev/null || echo 'fix-data-permissions: chown selhal …, pokračuji'; chmod … || true`). Kafka (uid 1000, `fsGroup 1000`) na tento share zapisuje i bez chown.
 
 ### Gotcha při rolloutu (bude se opakovat)
