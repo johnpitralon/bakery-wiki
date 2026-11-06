@@ -393,3 +393,10 @@ Aktualizováno: [[entities/bakery-gitops]], [[entities/fake-buster]], [[index]],
 - ✅ Oprava: default branch bakery-wiki je `dev`
 
 Aktualizováno: [[concepts/Wiki sync policy]], [[concepts/LLM wiki maintenance]], [[entities/bakery-wiki]], [[concepts/Koexistence s Kytary]], [[index]], tento log, `CLAUDE.md`, `AGENTS.md`, `README.md`.
+
+## [2026-11-06] tooling | bakery-multi-agent-platform mimo bakery-sync
+
+- ✅ Klon `bakery-multi-agent-platform` je neaktuální a není udržovaný; bakery-sync je v něm vypnutý (marker `off`). Po dokončení multi-agent platformy z Kytary workspace se naklonuje znovu a dostane obvyklou jednorázovou otázku
+- ✅ Odstraněn ze seznamu repozitářů zapnutých markerem
+
+Aktualizováno: [[concepts/Wiki sync policy]], tento log.

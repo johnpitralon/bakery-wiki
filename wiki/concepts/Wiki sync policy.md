@@ -48,7 +48,8 @@ Od 2026-11-06 policy vynucují hooky `tools/bakery-sync/` (Claude Code, Codex, C
 Zapnutí: **marker** `.git/info/bakery-sync` v klonu (`bakery-sync-optin.sh on`, nic se necommituje)
 nebo **spínač** — sekce `## Bakery Wiki sync (blocking rule)` v `CLAUDE.md`/`AGENTS.md`.
 Marker má přednost. Stav: bakery-gitops, bakery-onboarding, bakery-platform, fake-buster,
-stock-trader-grabit a bakery-multi-agent-platform jsou zapnuté markerem; bakery-wiki spínačem.
+stock-trader-grabit jsou zapnuté markerem; bakery-wiki spínačem.
+Klon `bakery-multi-agent-platform` je neaktuální a bakery-sync je v něm vypnutý (marker `off`); naklonuje se znovu, až bude hotová multi-agent platforma z Kytary workspace, a nový klon dostane obvyklou jednorázovou otázku.
 Nové repo v org `johnpitralon` dostane při startu session jednorázovou otázku.
 
 **Proč odděleně od Kytary:** na stejném stroji běží hooky Kytary.Wiki (`~/.wiki-sync`).
