@@ -3,7 +3,7 @@ title: Wiki sync policy
 type: concept
 tags: [wiki, process, meta]
 created: 2026-07-08
-updated: 2026-07-08
+updated: 2026-11-06
 ---
 
 **Povinné pravidlo:** každá smysluplná změna v bakery ekosystému se **projeví v [[entities/bakery-wiki]]** ve stejné session (ne až „někdy“).
@@ -30,9 +30,32 @@ updated: 2026-07-08
 3. **Append** do `wiki/log.md` (datum + co + které stránky)
 4. `updated:` ve frontmatter
 5. Žádné absolutní cesty v `wiki/*.md`
-6. **`./scripts/wiki-commit-push.sh`** — auto commit + push (nebo `task wiki:finish`)
+6. Commit na `dev`: agent použije explicitní `git add <cesty>` (nikdy `-A`) + `git commit`, push udělá `.githooks/post-commit`. `./scripts/wiki-commit-push.sh` (`git add -A`, nebo `task wiki:finish`) zůstává jen pro pipeline s lokálním modelem.
 
 Vypnutí: `WIKI_AUTO_COMMIT=false` nebo `WIKI_AUTO_PUSH=false`.
+
+## Vynucení hooky (bakery-sync)
+
+Od 2026-11-06 policy vynucují hooky `tools/bakery-sync/` (Claude Code, Codex, Cursor):
+
+- **session-start** — vloží kontext a u nového repa jednorázově zeptá, zda zapnout sync
+- **touched** — po každé editaci zapíše, které soubory session změnila
+- **stop** — pokud session editovala zdroje a wiki ne, připomene update, pak commit a push
+  (selhaný auto-push ohlásí také Stop hook)
+- **ack** (`bakery-sync-ack.sh <session_id>`) — změna wiki nepotřebuje, umlčí aktuální stav
+- **delegated** (`bakery-sync-delegated.sh <session_id>`) — wiki píše subagent na pozadí, Stop hook mlčí
+
+Zapnutí: **marker** `.git/info/bakery-sync` v klonu (`bakery-sync-optin.sh on`, nic se necommituje)
+nebo **spínač** — sekce `## Bakery Wiki sync (blocking rule)` v `CLAUDE.md`/`AGENTS.md`.
+Marker má přednost. Stav: bakery-gitops, bakery-onboarding, bakery-platform, fake-buster,
+stock-trader-grabit a bakery-multi-agent-platform jsou zapnuté markerem; bakery-wiki spínačem.
+Nové repo v org `johnpitralon` dostane při startu session jednorázovou otázku.
+
+**Proč odděleně od Kytary:** na stejném stroji běží hooky Kytary.Wiki (`~/.wiki-sync`).
+Kdyby sdílely marker či spínač, bakery znalosti by končily ve firemní wiki; uninstall Kytary
+navíc maže registrace s `wiki-sync-`. Bakery proto má vlastní `~/.bakery-sync`,
+`.git/info/bakery-sync`, spínač a skripty `bakery-sync-*.sh`; viz [[concepts/Koexistence s Kytary]].
+Instalace: `bash tools/bakery-sync/install.sh` jednou z hlavního klonu, pak se hooky samy aktualizují.
 
 ## Jak spustit
 

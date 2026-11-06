@@ -30,6 +30,13 @@ bakery-wiki/
 │   └── run-wiki-update-local.sh  ← fallback (API + apply)
 ├── raw/                   ← source documents (immutable, LLM never modifies)
 │   └── auto-snapshot-latest.md
+├── tools/
+│   ├── wiki-query.py          ← search / section / related (retrieval)
+│   ├── wiki_index.py, wiki_search.py  ← index builder + ranking
+│   ├── wiki-integrity-check.py  ← read-only kontrola vaultu
+│   ├── tests/                 ← testy retrievalu a integrity checkeru
+│   └── bakery-sync/           ← hooky pro synchronizaci wiki (viz níže)
+├── .cache/                ← odvozený index (gitignored, staví se z manifestu)
 ├── wiki/                  ← LLM-maintained wiki
 │   ├── index.md
 │   ├── log.md
@@ -70,6 +77,67 @@ updated: YYYY-MM-DD
 ## Workflows
 
 Viz `AGENTS.md` — ingest, update, lint.
+
+### Query (otázka → odpověď)
+
+Postup převzatý z Kytary.Wiki; v bakery-wiki není měřený (žádný eval).
+
+1. LLM **MUSÍ nejdřív** spustit `python3 tools/wiki-query.py search "<dotaz>"` a najít kandidátní stránky a sekce.
+2. Potom **MUSÍ** číst jen nalezenou sekci: `python3 tools/wiki-query.py section <cesta> <nadpis>`. Celou stránku nečíst jako běžný zdroj odpovědi.
+3. `python3 tools/wiki-query.py related <cesta>` jen když je pro odpověď doloženě potřeba další kontext.
+4. `wiki/index.md` číst přímo jen jako fallback, když nástroj nebo Python nejsou dostupné.
+5. Znovupoužitelnou odpověď (srovnání, rozhodnutí) založ jako novou stránku a aktualizuj index i log.
+
+### Kontrola integrity
+
+```bash
+python3 tools/wiki-integrity-check.py          # read-only, bez sítě
+python3 tools/wiki_index.py --force            # přestaví index do .cache/
+bash tools/tests/wiki-integrity-check.test.sh
+bash tools/tests/wiki-query-contract.test.sh
+bash tools/tests/wiki-index.test.sh
+```
+
+`.githooks/pre-commit` při staged `wiki/*.md` nejdřív zablokuje natvrdo zadané cesty,
+pak spustí `wiki-integrity-check.py` a `wiki_index.py --force` (fail-closed). Stránka nad
+40 000 znaků potřebuje rozdělit, nebo neprázdný frontmatter klíč `size_exception`
+(`wiki/log.md` ho má: append-only chronologie). Hook navíc jen varuje, když nejsou
+nainstalované bakery-sync hooky. Zapnutí: `git config core.hooksPath .githooks` (dělá `./setup.sh`).
+
+## Bakery Wiki sync (blocking rule)
+
+**Povinné pro všechny agenty i vývojáře.** Hooky `tools/bakery-sync/` hlídají, že práce
+v bakery repech skončí ve wiki. Spínačem je doslovný řetězec z nadpisu této sekce, takže
+v `bakery-wiki` je zapnuto vždy; ostatní bakery repa (bakery-gitops, bakery-onboarding,
+bakery-platform, fake-buster, stock-trader-grabit, ...) se zapínají markerem v klonu
+(`~/.bakery-sync/hooks/bakery-sync-optin.sh on`, nic se necommituje).
+
+**Proč odděleně od hooků Kytary:** na stroji běží i hooky Kytary.Wiki (`~/.wiki-sync`),
+které zapíná marker `.git/info/wiki-sync` nebo spínač Kytary v CLAUDE/AGENTS.md. Kdyby
+bakery sdílelo marker či spínač, bakery znalosti by se posílaly do firemní wiki; a
+uninstall Kytary maže každou registraci s `wiki-sync-`. Proto má bakery vlastní
+`~/.bakery-sync`, `.git/info/bakery-sync` a skripty `bakery-sync-*.sh`.
+Do tohoto souboru ani do `AGENTS.md` proto nikdy nepatří spínač Kytary.
+
+Při změně, která mění obsah nebo způsob údržby wiki:
+
+1. Přidej záznam na **konec** `wiki/log.md` (jeden append-only log), formát `## [YYYY-MM-DD] <type> | <title>`.
+2. Aktualizuj dotčené stránky, `updated:` a řádek v `wiki/index.md` u nové stránky.
+3. Spusť `python3 tools/wiki-integrity-check.py`.
+4. Commitni **rovnou do `dev`**: `git add` jen soubory, které jsi editoval ty, **nikdy `-A`**
+   (vault sdílí paralelní sessions). Zpráva `docs(wiki): <stručný popis>`.
+5. Push dělá `.githooks/post-commit` sám; selhání pushe ohlásí Stop hook.
+
+Změna bez dopadu na obsah se odbyde `~/.bakery-sync/hooks/bakery-sync-ack.sh <session_id>`;
+při psaní wiki subagentem zavolej `bakery-sync-delegated.sh <session_id>`.
+
+Hooky se instalují **jednou z hlavního klonu** (`bash tools/bakery-sync/install.sh`, z git
+worktree to installer odmítne) a pak se samy aktualizují, pokud klon odpovídá `origin/dev`.
+Jednorázová kontrola, zda jsou hooky aktuální:
+
+```bash
+grep -q self_update_hooks ~/.bakery-sync/hooks/lib.sh && echo OK || echo "reinstall: bash tools/bakery-sync/install.sh"
+```
 
 ### Wiki update trigger
 

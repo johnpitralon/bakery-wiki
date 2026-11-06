@@ -3,7 +3,7 @@ title: Koexistence s Kytary
 type: concept
 tags: [kind, pilot, infrastructure, scope]
 created: 2026-07-08
-updated: 2026-07-10
+updated: 2026-11-06
 ---
 
 Pilot **Platform v2** běží na stejném Kind clusteru **`kind-desktop`** jako Kytary stack — bez druhého Traefiku a bez duplicitního Postgresu.
@@ -28,6 +28,7 @@ Bakery **konzumuje**, nemění ani nemaže kytary infra.
 | stock-trader-grabit služby | `stock-trader-grabit` |
 | bakery-onboarding | dle gitops manifestů |
 | Kafka (bakery-owned) | `infrastructure` — `kafka.infrastructure.svc.cluster.local:9092` |
+| wiki-sync hooky (`~/.bakery-sync`, vlastní marker a spínač, oddělené od `~/.wiki-sync` Kytary) | lokálně, mimo cluster |
 
 ## Hranice scope (bakery vs kytary)
 

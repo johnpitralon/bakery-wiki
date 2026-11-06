@@ -2,8 +2,9 @@
 title: Log
 type: overview
 tags: [log, meta]
+size_exception: append-only chronologie, nečte se celá (hledá se přes tools/wiki-query.py)
 created: 2026-07-08
-updated: 2026-10-26
+updated: 2026-11-06
 ---
 
 Chronologický záznam aktivit wiki — ingest, query, lint, údržba.
@@ -383,3 +384,12 @@ Aktualizováno: [[entities/stock-trader-grabit]], tento log.
 - ⚠️ Rollout gotcha: Argo `bakery-gitops-root` měla zaseknutou sync operaci (čekání na healthy Kafku) → ukončit operaci patchem `phase: Terminating`; StatefulSet navíc nevyměnil rozbitý pod → `kubectl -n infrastructure delete pod kafka-0`
 
 Aktualizováno: [[entities/bakery-gitops]], [[entities/fake-buster]], [[index]], tento log.
+
+## [2026-11-06] tooling | Retrieval index a hooky bakery-sync (port z Kytary.Wiki)
+
+- ✅ **Retrieval** — `tools/wiki-query.py` (search/section/related), `wiki_index.py` (cache v `.cache/`, gitignored, staví se z manifestu), `wiki-integrity-check.py`; postup převzatý z Kytary.Wiki, v bakery-wiki neměřený. Pre-commit je spouští při staged `wiki/*.md`; `wiki/log.md` má `size_exception` (append-only)
+- ✅ **Hooky** `tools/bakery-sync/` — port wiki-sync z Kytary.Wiki, vše přejmenováno na `bakery-sync` (`~/.bakery-sync`, marker `.git/info/bakery-sync`, spínač `Bakery Wiki sync`), aby se bakery znalosti nemíchaly s hooky Kytary na stejném stroji; test `isolation.test.sh` to hlídá
+- ✅ Agenti commitují explicitním `git add <cesty>` (nikdy `-A`); `wiki-commit-push.sh` jen pro lokální modely
+- ✅ Oprava: default branch bakery-wiki je `dev`
+
+Aktualizováno: [[concepts/Wiki sync policy]], [[concepts/LLM wiki maintenance]], [[entities/bakery-wiki]], [[concepts/Koexistence s Kytary]], [[index]], tento log, `CLAUDE.md`, `AGENTS.md`, `README.md`.

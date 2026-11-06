@@ -3,10 +3,10 @@ title: Index
 type: overview
 tags: [index, meta]
 created: 2026-07-08
-updated: 2026-10-26
+updated: 2026-11-06
 ---
 
-Katalog stránek wiki. LLM čte tento soubor jako první při dotazech.
+Katalog stránek wiki. Dotazy začínají hledáním (`python3 tools/wiki-query.py search "<dotaz>"`); tento katalog je fallback, když nástroj nebo Python nejsou dostupné.
 
 ## Přehled
 
@@ -34,8 +34,8 @@ Katalog stránek wiki. LLM čte tento soubor jako první při dotazech.
 | [[concepts/Service onboarding]] | bakery-onboarding pipeline a artefakty |
 | [[concepts/Koexistence s Kytary]] | Kind `kind-desktop`, sdílený `infrastructure` NS, **scope hranice** |
 | [[concepts/Image versions]] | `image-versions.env` jako single source of truth |
-| [[concepts/LLM wiki maintenance]] | Trigger pro update wiki (libovolné LLM) |
-| [[concepts/Wiki sync policy]] | **Povinně** — wiki po každé platformní změně |
+| [[concepts/LLM wiki maintenance]] | Trigger pro update wiki (libovolné LLM) + retrieval přes `tools/wiki-query.py` |
+| [[concepts/Wiki sync policy]] | **Povinně** — wiki po každé platformní změně; vynucují hooky `bakery-sync` (oddělené od Kytary) |
 | [[concepts/E2E smoke tests]] | Playwright smoke v app repech (`task e2e`) |
 
 ## Zdroje

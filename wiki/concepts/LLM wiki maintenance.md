@@ -3,7 +3,7 @@ title: LLM wiki maintenance
 type: concept
 tags: [wiki, llm, automation, trigger]
 created: 2026-07-08
-updated: 2026-07-08
+updated: 2026-11-06
 ---
 
 Mechanismus udržování [[entities/bakery-wiki]] — **nezávislý na konkrétním LLM**: cloud IDE agenty **i lokální modely** (Ollama, LM Studio, LiteLLM, Open WebUI).
@@ -42,6 +42,22 @@ Env: `WIKI_LLM_BASE_URL`, `WIKI_LLM_MODEL` — default Ollama `http://127.0.0.1:
 | `ingest` | Nový `raw/` | `wiki/sources/src-…` + propagace |
 | `lint` | Periodicky | Kontradikce, orphan, statusy |
 
+## Retrieval (search-first)
+
+Dotazy nad wiki se nečtou přes celý `index.md`, ale přes `tools/wiki-query.py`:
+
+```bash
+python3 tools/wiki-query.py search "<dotaz>"
+python3 tools/wiki-query.py section <cesta> <nadpis>
+python3 tools/wiki-query.py related <cesta>      # jen když je potřeba
+```
+
+Index (`tools/wiki_index.py`) žije v `.cache/` — je odvozený, gitignored a staví se znovu
+z manifestu, když neodpovídá working tree. Postup je převzatý z Kytary.Wiki a v bakery-wiki
+není měřený. `tools/wiki-integrity-check.py` (frontmatter, odkazy, kotvy, indexace, strop
+40 000 znaků; výjimka klíčem `size_exception`) i přestavba indexu běží v `.githooks/pre-commit`
+při staged `wiki/*.md`. Viz [[entities/bakery-wiki]], [[concepts/Wiki sync policy]].
+
 ## Integrace
 
 | Nástroj | Jak spustit |
@@ -53,7 +69,7 @@ Env: `WIKI_LLM_BASE_URL`, `WIKI_LLM_MODEL` — default Ollama `http://127.0.0.1:
 | Cursor / Claude | `/wiki-update` → `task wiki:finish` |
 | Aider + Ollama | `task wiki:aider` → `task wiki:finish` |
 
-Po každém update: **`task wiki:finish`** nebo `wiki-commit-push.sh` (auto commit + push).
+Po každém update: agent commitne explicitními `git add <cesty>` (nikdy `-A`) a push udělá post-commit; `task wiki:finish` / `wiki-commit-push.sh` (`git add -A`) jen pro pipeline s lokálním modelem.
 Viz [[concepts/Wiki sync policy]].
 
 Detail: `triggers/README.md`

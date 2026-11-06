@@ -48,11 +48,18 @@ Výstup lokálního modelu: `<wiki-file path="wiki/…">` tagy → `apply-wiki-r
 
 ## Povinný postup
 
-1. Přečti `CLAUDE.md` a `wiki/index.md`
+1. Přečti `CLAUDE.md`; fakta hledej search-first: `python3 tools/wiki-query.py search "<dotaz>"`, pak `section <cesta> <nadpis>` (`wiki/index.md` jen jako fallback)
 2. Kontext: `raw/auto-snapshot-*.md` nebo `triggers/out/LATEST-prompt.md`
 3. Aktualizuj `wiki/`, `index.md`, append `log.md`
 4. Žádné `/Users/...` v `wiki/*.md`
 5. Smaž `.wiki-update-request` po dokončení
-6. **Vždy** `./scripts/wiki-commit-push.sh` — auto commit + push
+6. Agenti: explicitní `git add <cesty>` (nikdy `-A`) + `git commit` na `dev`; push udělá post-commit.
+   `./scripts/wiki-commit-push.sh` (používá `git add -A`) zůstává jen pro pipeline s lokálním modelem.
+
+## Hooky (bakery-sync)
+
+Povinná sekce `## Bakery Wiki sync (blocking rule)` v `CLAUDE.md`. Hooky se instalují jednou
+z hlavního klonu (`bash tools/bakery-sync/install.sh`). Jednorázová kontrola:
+`grep -q self_update_hooks ~/.bakery-sync/hooks/lib.sh` — když selže, spusť installer znovu.
 
 Detail: `WIKI_UPDATE.md`, `triggers/README.md`

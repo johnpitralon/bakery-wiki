@@ -36,6 +36,18 @@ task wiki:local
 
 Detail: `triggers/README.md`, `WIKI_UPDATE.md`
 
+## Retrieval, kontroly a hooky
+
+```bash
+python3 tools/wiki-query.py search "kafka"             # hledání (search-first)
+python3 tools/wiki-query.py section <cesta> <nadpis>   # čtení jedné sekce
+python3 tools/wiki-integrity-check.py                  # kontrola integrity
+python3 tools/wiki_index.py --force                    # přestavba indexu (.cache/, gitignored)
+bash tools/bakery-sync/install.sh                      # hooky, jednou z hlavního klonu
+```
+
+Detail: `CLAUDE.md` (Query, Kontrola integrity, Bakery Wiki sync), `tools/bakery-sync/README.md`.
+
 ## Structure
 
 | Path | Who edits |
@@ -45,6 +57,7 @@ Detail: `triggers/README.md`, `WIKI_UPDATE.md`
 | `CLAUDE.md` | Schema — read first |
 | `AGENTS.md` | Auto-instrukce pro AI agenty |
 | `WIKI_UPDATE.md` | Univerzální update prompt |
+| `tools/` | Retrieval, kontrola integrity, bakery-sync hooky |
 
 ## Related repos
 
