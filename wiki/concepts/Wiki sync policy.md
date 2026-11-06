@@ -38,7 +38,7 @@ Vypnutí: `WIKI_AUTO_COMMIT=false` nebo `WIKI_AUTO_PUSH=false`.
 
 Od 2026-11-06 policy vynucují hooky `tools/bakery-sync/` (Claude Code, Codex, Cursor):
 
-- **session-start** — vloží kontext a u nového repa jednorázově zeptá, zda zapnout sync
+- **session-start** — zaznamená začátek session, samo aktualizuje hooky, varuje před zastaralou instalací a u nového repa se jednorázově zeptá, zda zapnout sync
 - **touched** — po každé editaci zapíše, které soubory session změnila
 - **stop** — pokud session editovala zdroje a wiki ne, připomene update, pak commit a push
   (selhaný auto-push ohlásí také Stop hook)

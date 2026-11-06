@@ -66,7 +66,7 @@ při staged `wiki/*.md`. Viz [[entities/bakery-wiki]], [[concepts/Wiki sync poli
 | LM Studio | `WIKI_LLM_BASE_URL=http://127.0.0.1:1234/v1` |
 | LiteLLM / bakery gateway | URL z `bakery-agent-infra` |
 | Open WebUI | Vlož `LATEST-prompt.md` do chatu → apply |
-| Cursor / Claude | `/wiki-update` → `task wiki:finish` |
+| Cursor / Claude | `/wiki-update` |
 | Aider + Ollama | `task wiki:aider` → `task wiki:finish` |
 
 Po každém update: agent commitne explicitními `git add <cesty>` (nikdy `-A`) a push udělá post-commit; `task wiki:finish` / `wiki-commit-push.sh` (`git add -A`) jen pro pipeline s lokálním modelem.

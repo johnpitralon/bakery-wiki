@@ -23,7 +23,7 @@ REACHABILITY_DIRECTORIES = {"entities", "concepts", "domains", "sources", "workp
 FOLDER_PRECEDENCE = ("entities", "concepts", "domains", "", "changelog", "incidents")
 PAGE_SIZE_LIMIT = 40_000
 LOG_ENTRY_LIMIT = 1_200
-# CLAUDE.md's "Délka záznamu v logu" rule (≤1200 characters/entry)
+# Kytary.Wiki wiki/CONVENTIONS.md (upstream) "Délka záznamu v logu" rule (≤1200 characters/entry)
 # is explicitly NOT retroactive — "Netýká se to zpětně existujících záznamů
 # — historie se nepřepisuje, pravidlo platí pro nově psané záznamy od
 # 2026-09-21." Entries dated before this constant predate the rule and are
@@ -339,7 +339,7 @@ def validate_log_archives(pages: dict[str, Page]) -> list[Finding]:
 def validate_log_entry_length(pages: dict[str, Page]) -> list[Finding]:
     """Warn (never fail) when a wiki/log/*.md entry exceeds LOG_ENTRY_LIMIT chars.
 
-    CLAUDE.md "Délka záznamu v logu" sets a target of ≤1200 characters
+    Kytary.Wiki wiki/CONVENTIONS.md (upstream) "Délka záznamu v logu" sets a target of ≤1200 characters
     per entry ("záznam je rozcestník v čase, ne úložiště") — measured
     2026-09-21 at ~2760 chars/entry average, ~390k tokens/month of vault
     growth from the log alone. This is a WARNING, not fail-closed: parallel
@@ -349,7 +349,7 @@ def validate_log_entry_length(pages: dict[str, Page]) -> list[Finding]:
     Entries are split on `## [YYYY-MM-DD]` headings; an entry's text runs
     from its heading up to (not including) the next such heading, or EOF.
 
-    Not retroactive, by explicit rule in CLAUDE.md: only entries dated
+    Not retroactive, by explicit rule in Kytary.Wiki wiki/CONVENTIONS.md (upstream): only entries dated
     on or after LOG_ENTRY_LENGTH_RULE_EFFECTIVE_DATE are checked — history
     is not rewritten, and older entries were written before the rule
     existed.
@@ -378,8 +378,7 @@ def validate_log_entry_length(pages: dict[str, Page]) -> list[Finding]:
                         rel,
                         start_index + 1,
                         "LOG_ENTRY_TOO_LONG",
-                        f"záznam má {length} znaků, cíl je ≤{LOG_ENTRY_LIMIT} znaků "
-                        "(CLAUDE.md, sekce „Délka záznamu v logu“)",
+                        f"záznam má {length} znaků, cíl je ≤{LOG_ENTRY_LIMIT} znaků",
                     )
                 )
     return findings
@@ -427,7 +426,7 @@ def validate_page_sizes(pages: dict[str, Page]) -> list[Finding]:
     breaking the chronology. wiki/log/*.md month archives are this; so are
     wiki/changelog/*.md pages (e.g. a single dateless table, or a sequence
     of "Vlna N" sections). Splitting either would just fragment a record
-    nobody reads end-to-end, see CLAUDE.md "Vrstvy kontextu".
+    nobody reads end-to-end, see Kytary.Wiki wiki/CONVENTIONS.md (upstream) "Vrstvy kontextu".
 
     Also exempt: a single page carrying a non-empty `size_exception:`
     frontmatter key — a deliberate, per-page override for the rare case
@@ -474,9 +473,8 @@ def validate_page_sizes(pages: dict[str, Page]) -> list[Finding]:
                     rel,
                     1,
                     "PAGE_TOO_LARGE",
-                    f"stránka má {size} znaků, práh je {PAGE_SIZE_LIMIT} — buď stránku rozděl "
-                    "(viz CLAUDE.md, sekce „Dělení předimenzovaných stránek: přesouvat, ne "
-                    "přepisovat“), nebo do frontmatteru dopiš neprázdný `size_exception: <důvod>`",
+                    f"stránka má {size} znaků, práh je {PAGE_SIZE_LIMIT} — buď stránku rozděl, "
+                    "nebo do frontmatteru dopiš neprázdný `size_exception: <důvod>`",
                 )
             )
     return findings

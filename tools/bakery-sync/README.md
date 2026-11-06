@@ -1,7 +1,7 @@
 # bakery-sync — hooky pro synchronizaci wiki
 
 Agent-neutrální hooky (Claude Code, Codex CLI, Cursor), které hlídají, že změny v bakery
-repech skončí i v `bakery-wiki`: SessionStart (kontext + jednorázová otázka u nového repa),
+repech skončí i v `bakery-wiki`: SessionStart (zaznamená session, samo aktualizuje hooky, varuje před zastaralou instalací, jednorázově se zeptá u nového repa),
 PostToolUse (zaznamenává editované soubory) a Stop (připomene update, commit a push wiki).
 
 ## Původ

@@ -54,7 +54,7 @@ Katalog stránek wiki. Dotazy začínají hledáním (`python3 tools/wiki-query.
 ```bash
 task wiki:update      # příprava
 task wiki:aider       # lokální model
-task wiki:finish      # commit + push po agent update
+task wiki:finish      # commit + push (git add -A) — jen pro lokální model / Aider; agenti: explicitní git add + commit
 ```
 
 Viz [[concepts/LLM wiki maintenance]], [[concepts/Wiki sync policy]].

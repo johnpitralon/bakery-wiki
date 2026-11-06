@@ -104,6 +104,14 @@ pak spustí `wiki-integrity-check.py` a `wiki_index.py --force` (fail-closed). S
 (`wiki/log.md` ho má: append-only chronologie). Hook navíc jen varuje, když nejsou
 nainstalované bakery-sync hooky. Zapnutí: `git config core.hooksPath .githooks` (dělá `./setup.sh`).
 
+### Wiki update trigger
+
+```bash
+task wiki:update              # příprava
+task wiki:aider               # lokální model + Aider (doporučeno)
+task wiki:local               # fallback: API bundle + apply
+```
+
 ## Bakery Wiki sync (blocking rule)
 
 **Povinné pro všechny agenty i vývojáře.** Hooky `tools/bakery-sync/` hlídají, že práce
@@ -137,14 +145,6 @@ Jednorázová kontrola, zda jsou hooky aktuální:
 
 ```bash
 grep -q self_update_hooks ~/.bakery-sync/hooks/lib.sh && echo OK || echo "reinstall: bash tools/bakery-sync/install.sh"
-```
-
-### Wiki update trigger
-
-```bash
-task wiki:update              # příprava
-task wiki:aider               # lokální model + Aider (doporučeno)
-task wiki:local               # fallback: API bundle + apply
 ```
 
 ## Repository mapping (Platform v2)

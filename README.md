@@ -53,7 +53,7 @@ Detail: `CLAUDE.md` (Query, Kontrola integrity, Bakery Wiki sync), `tools/bakery
 | Path | Who edits |
 |------|-----------|
 | `raw/` | Humans only (drop sources here) |
-| `wiki/` | LLM (+ human review via PR) |
+| `wiki/` | LLM, commits straight to `dev` |
 | `CLAUDE.md` | Schema — read first |
 | `AGENTS.md` | Auto-instrukce pro AI agenty |
 | `WIKI_UPDATE.md` | Univerzální update prompt |

@@ -35,7 +35,7 @@ Pro Open WebUI: vlož `triggers/out/LATEST-prompt.md` do chatu → `apply-wiki-r
 | `task wiki:update` | snapshot + bundle |
 | `task wiki:aider` | **doporučeno** — lokální model |
 | `task wiki:local` | API fallback |
-| `task wiki:finish` | Po agent update — commit + push + cleanup |
+| `task wiki:finish` | Po lokálním modelu / Aideru — commit + push + cleanup (`git add -A`) |
 | `task wiki:commit` | Jen commit + push |
 
-**Auto commit/push** po každém update: `scripts/wiki-commit-push.sh` (vypnutí: `WIKI_AUTO_COMMIT=false`).
+**Auto commit/push** jen pro pipeline s lokálním modelem: `scripts/wiki-commit-push.sh` (`git add -A`, vypnutí: `WIKI_AUTO_COMMIT=false`). Agenti: explicitní `git add <cesty>` + commit, push udělá post-commit.

@@ -8,7 +8,7 @@ and rank without re-reading every file on every query. This module builds
 exactly that: for every wiki/**/*.md page — path, title, type, tags,
 created/updated, size in characters, a list of headings with line ranges,
 outbound/inbound `[[links]]`, and a one-sentence summary (the first
-paragraph under frontmatter, per CLAUDE.md page structure).
+paragraph under frontmatter, per Kytary.Wiki wiki/CONVENTIONS.md (upstream) page structure).
 
 CRITICAL — this index is a derived, machine-only cache. It must NEVER be
 committed (see repo .gitignore) and staleness must be structurally
@@ -19,7 +19,7 @@ file, a deleted file — forces a full rebuild before returning. Nothing here
 depends on a human or a hook remembering to regenerate anything.
 
 Why the paranoia in the docstring above: an opt-in local hook (like
-tools/wiki-sync's) can be missing and the only visible symptom is a commit
+tools/bakery-sync's) can be missing and the only visible symptom is a commit
 that should have been blocked going through anyway — a human eventually
 notices a bad commit. A silently stale *cache* has no equivalent tell: the
 agent just answers confidently from data that no longer matches the vault.
@@ -99,7 +99,7 @@ def parse_tags(raw: str | None) -> list[str]:
 
 
 def extract_summary(lines: list[str], body_start: int) -> str:
-    """First paragraph after frontmatter — CLAUDE.md requires every
+    """First paragraph after frontmatter — Kytary.Wiki wiki/CONVENTIONS.md (upstream) requires every
     page to open with a 2-3 sentence overview, no heading, right under the
     frontmatter block. Stops at the first blank line or heading."""
     collected: list[str] = []

@@ -19,7 +19,7 @@ updated: 2026-11-06
 | Path | Kdo edituje |
 |------|-------------|
 | `raw/` | Lidé (immutable pro LLM) |
-| `wiki/` | LLM + review přes PR |
+| `wiki/` | LLM, commity rovnou do `dev` |
 | `triggers/out/` | Prompt bundle + LLM odpovědi (lokální modely) |
 | `tools/` | Retrieval (`wiki-query.py`), kontrola integrity, hooky `tools/bakery-sync/` |
 | `.cache/` | Odvozený index (gitignored) |
