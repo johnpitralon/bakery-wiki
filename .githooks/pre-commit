@@ -1,5 +1,35 @@
 #!/usr/bin/env bash
-# Pre-commit: block hardcoded machine-specific paths in wiki/*.md
+# Pre-commit: block hardcoded machine-specific paths in wiki/*.md, then verify
+# vault integrity and the retrieval index for staged wiki/*.md changes.
+# Enable once per clone: git config core.hooksPath .githooks
+
+# --- Kontrola bakery-sync hooků (nikdy neblokuje) --------------------------------
+# Jednorázová výzva: bez nainstalovaných (nebo zastaralých, bez self_update_hooks)
+# bakery-sync hooků se wiki po změnách kódu nepřipomíná. Jen tisk na stderr, exit
+# kód se nemění; jeden grep. Cesta jde přes BAKERY_SYNC_HOME (default ~/.bakery-sync).
+check_bakery_sync_install() {
+  local root home note=""
+  root=$(git rev-parse --show-toplevel 2>/dev/null) || return 0
+  [ -f "$root/tools/bakery-sync/install.sh" ] || return 0
+  home="${BAKERY_SYNC_HOME:-$HOME/.bakery-sync}"
+  if [ ! -d "$home" ]; then
+    note="bakery-sync hooky nejsou nainstalované — wiki se po změnách kódu nebude připomínat."
+  elif ! grep -q self_update_hooks "$home/hooks/lib.sh" 2>/dev/null; then
+    note="nainstalované bakery-sync hooky jsou zastaralé (bez automatické aktualizace)."
+  fi
+  [ -n "$note" ] || return 0
+  {
+    echo ""
+    echo "⚠ bakery-sync: $note"
+    echo "  Spusť JEDNOU (z hlavního klonu):"
+    echo "    bash \"$root/tools/bakery-sync/install.sh\""
+    echo "  Potom se hooky aktualizují samy. Commit tím není blokován."
+    echo ""
+  } >&2
+  return 0
+}
+check_bakery_sync_install || true
+
 pattern='(/Users/|/home/|C:\\Users|workspace_kytary)'
 fail=0
 
@@ -19,4 +49,30 @@ while IFS= read -r -d '' f; do
   printf '%s\n' "$hits" | sed 's/^/   /' >&2
 done < <(git diff --cached --name-only -z --diff-filter=ACM)
 
-exit $fail
+[ "$fail" -ne 0 ] && exit "$fail"
+
+# Bez staged wiki/*.md se celý sken vaultu přeskočí.
+if git diff --cached --name-only --diff-filter=ACM | grep -qE '^wiki/.*\.md$'; then
+  echo "== Kontrola integrity wiki ==" >&2
+  # Kandidát se musí ZKUSIT SPUSTIT, ne jen najít na PATH (Windows "app
+  # execution alias" stub existuje na PATH i bez Pythonu, exit 49).
+  PY=""
+  for _cand in python3 python py; do
+    if command -v "$_cand" >/dev/null 2>&1 && "$_cand" -c '' >/dev/null 2>&1; then
+      PY="$_cand"
+      break
+    fi
+  done
+  if [ -z "$PY" ]; then
+    echo "✖ chybí funkční Python 3 pro kontrolu integrity wiki" >&2
+    exit 1
+  fi
+  # `|| exit 1` je nutné: skript neběží pod `set -e`, bez něj by se nenulový
+  # návratový kód checkeru zahodil a commit by prošel (fail-open, nález
+  # Kytary.Wiki 2026-09-14).
+  "$PY" tools/wiki-integrity-check.py || exit 1
+
+  # Verify-only: index se staví do .cache/ (gitignored), nic se necommituje.
+  echo "== Kontrola navigačního indexu (tools/wiki_index.py) ==" >&2
+  "$PY" tools/wiki_index.py --force || exit 1
+fi

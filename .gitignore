@@ -10,3 +10,8 @@ Thumbs.db
 triggers/out/*.md
 !triggers/out/.gitkeep
 triggers/local-models.env
+
+# Retrieval index cache: odvozený, znovu se staví z manifestu (tools/wiki_index.py)
+/.cache/
+__pycache__/
+*.pyc
