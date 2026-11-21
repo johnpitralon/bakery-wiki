@@ -400,3 +400,13 @@ Aktualizováno: [[concepts/Wiki sync policy]], [[concepts/LLM wiki maintenance]]
 - ✅ Odstraněn ze seznamu repozitářů zapnutých markerem
 
 Aktualizováno: [[concepts/Wiki sync policy]], tento log.
+
+## [2026-11-21] tooling | Zrušen starý port bakery-multi-agent-platform
+
+- ✅ Denis rozhodl smazat starý osobní port `johnpitralon/bakery-multi-agent-platform` (počáteční port z Kytary.MultiAgentPlatform z 2026-07-12; neaktuální, neudržovaný, bakery-sync v něm byl vypnutý)
+- ✅ Nahradí ho čerstvý port z aktuální Kytary.MultiAgentPlatform: osobní platforma malých jednoúčelových automatizačních agentů (první plánovaný agent: měsíční DPH, později DPFO), znovupoužije harness MAP (správa seatů, monitoring, OAuth / lokální model přes LM Studio gemma-4). Samostatné nové repo, stále ve fázi návrhu, název nerozhodnut
+- ✅ Lokální klon odstraněn z `<workspace>` (přesunut do tmp); `fake-buster-workspace.code-workspace` složku už nevypisuje
+- ⬜ GitHub repo čeká na smazání Denisem (token `gh` nemá scope `delete_repo`)
+- ⬜ bakery-platform PR #33 (otevřený) odebírá repo z distribuce hooků: `scripts/refresh-githooks.sh`, `Taskfile.yml` (`hooks-all`), `docs/git-hooks.md`
+
+Aktualizováno: [[concepts/Wiki sync policy]], tento log.
