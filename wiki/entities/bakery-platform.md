@@ -3,7 +3,7 @@ title: bakery-platform
 type: entity
 tags: [repo, platform, bootstrap, helm, ci, githooks]
 created: 2026-07-08
-updated: 2026-07-12
+updated: 2026-11-21
 ---
 
 Repozitář **infrastrukturního bootstrapu** Platform v2 — náhrada části [[entities/service-bakery]]. Role **Kytary.K8S.Infrastructure**.
@@ -40,6 +40,19 @@ Repozitář **infrastrukturního bootstrapu** Platform v2 — náhrada části [
 - `task kind-disk-maintenance` — pravidelná údržba Docker disku + evicted/failed podů na Kind
 - `ci-build-from-catalog.sh --bump-gitops` — build + auto tag bump
 
+## Změny pro personal-agents a bump skript (2026-11-21) 🔄
+
+**PR #34 (otevřený) 🔄** — podpora aplikace [[entities/personal-agents]]:
+
+- Chart `bakery-app`: generické `cronjobs: []` (`templates/cronjobs.yaml`, per-item `fullnameOverride`; `enabled: false` položku opravdu vypne).
+- Chart `bakery-app`: `persistence: []` (`templates/pvc.yaml`).
+- `scripts/apply-app-secrets.sh`: nová větev `personal-agents` (čte 7 klíčů z git-ignorovaného `deploy/clusters/local/cluster.env` app repa, vytvoří Secret `personal-agents-secrets`; bez DB, tedy bez db-init).
+- `image-versions.env`: `PERSONAL_AGENTS_PYTHON_TAG=3.12-slim`.
+- CI overlay `argo/workflows/overlays/personal-agents` (stejný vzor jako stock-trader-grabit: argo-ci SA/RBAC, WorkflowTemplate `service-ci`, maven cache PVC).
+- Sekce v README. Renderování fake-buster a stock-trader-grabit se nemění.
+
+**PR #35 (otevřený) 🔄** — oprava identity v `scripts/bump-gitops-image-tag.sh`: místo trvalého `git config user.name/user.email` se používá `git -c user.name=git-bump-tag -c user.email=git-bump-tag@local` jen pro commit a push; v klonu nezůstává lokální identita. Souvislost: incident v [[entities/bakery-gitops]] (2026-11-21).
+
 ## Bootstrap pořadí
 
 1. Kytary / Argo CD na clusteru
@@ -55,3 +68,4 @@ Repozitář **infrastrukturního bootstrapu** Platform v2 — náhrada části [
 - [[concepts/Image versions]]
 - [[concepts/GitOps workflow]]
 - [[entities/bakery-gitops]]
+- [[entities/personal-agents]]

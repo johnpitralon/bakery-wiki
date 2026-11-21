@@ -3,7 +3,7 @@ title: GitOps workflow
 type: concept
 tags: [gitops, argocd, deploy, applicationset]
 created: 2026-07-08
-updated: 2026-07-08
+updated: 2026-11-21
 ---
 
 Deploy model Platform v2: **Argo CD** + [[entities/bakery-gitops]] — **jediný deployer**, žádný ruční helm.
@@ -35,6 +35,8 @@ Generator: `apps/*/app.json` (Kytary-style).
 2. Push image do registry
 3. `ci-build-from-catalog.sh --bump-gitops` nebo `bump-gitops-image-tag.sh`
 4. Commit do gitops → Argo sync
+
+Identita `git-bump-tag` se od bakery-platform PR #35 (otevřený) nastavuje per příkaz přes `git -c`, ne trvale v klonu; viz [[entities/bakery-gitops]].
 
 ## Anti-pattern (zakázáno)
 

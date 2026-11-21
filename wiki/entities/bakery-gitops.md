@@ -3,7 +3,7 @@ title: bakery-gitops
 type: entity
 tags: [repo, gitops, argocd, applicationset]
 created: 2026-07-08
-updated: 2026-10-26
+updated: 2026-11-21
 ---
 
 **GitOps** repozitář pro Bakery — odpovídá **Kytary.GitOps**. Argo CD root app syncuje tento repozitář; aplikace řídí **ApplicationSet**.
@@ -99,9 +99,21 @@ Host údržba: `task kind-disk-maintenance` v [[entities/bakery-platform]].
 - `clusters/hetzner-prod/` — Argo overlay (ApplicationSet only)
 - `values-hetzner-prod.yaml` per app
 
+## Incident: identita git-bump-tag v klonu (2026-11-21) 🔄
+
+- Commit `43663f0` "feat: aplikace personal-agents (DPH agent)" skončil **přímo v `dev` bez PR**.
+- **Příčina**: hlavní klon bakery-gitops měl zbytkovou lokální git identitu `git-bump-tag`. Nastavil ji skript bakery-platform `scripts/bump-gitops-image-tag.sh` (`git config user.name` / `user.email`) a nikdy ji neodnastavil. Skript pracuje defaultně se sourozeneckým klonem `../bakery-gitops` (GITOPS_ROOT) a volá ho `scripts/ci-build-from-catalog.sh` při `GITOPS_BUMP=true`. Hooky `pre-commit` a `pre-push` v bakery-gitops identitě `git-bump-tag` záměrně dovolují commit/push do chráněných větví, takže ruční commit prošel rovnou do `dev`.
+- **Dopad**: Argo CD (root app `bakery-gitops-root`, automated prune + selfHeal) vytvořil namespace `personal-agents`, CronWorkflow `personal-agents-merge-deploy` a Application `personal-agents`. Application skončila v ComparisonError, protože ciPath overlay `argo/workflows/overlays/personal-agents` v bakery-platform neexistoval. Žádný workflow neběžel a ostatní aplikace nebyly dotčeny.
+- **Řešení**: revert přes **bakery-gitops PR #23** (merge commit `399be71`); strom je shodný se stavem před `43663f0`, Argo vše pruneoval (root Synced/Healthy). Lokální identita v klonu odnastavena, platí globální identita uživatele.
+- **Root-cause fix**: [[entities/bakery-platform]] PR #35 (otevřený) — skript používá `git -c user.name=git-bump-tag -c user.email=git-bump-tag@local` jen pro commit a push; hooky identitu vidí přes `GIT_CONFIG_PARAMETERS`. Ověřeno na vyhozeném klonu se skutečným pre-push hookem: bump projde, lokální identita nezůstane, ruční commit do `dev` je dál blokován.
+- **Kontrola před commitem** v klonu bakery-gitops: `git config --local user.name` nesmí vracet `git-bump-tag`.
+- `validate.yml` v bakery-gitops i `ci.yml` v bakery-platform běží jen na `main`, takže PR do `dev` nemají žádné checky.
+- Registrace aplikace [[entities/personal-agents]] bude znovu přistát jako běžné PR (podmínky v entitě).
+
 ## Souvislosti
 
 - [[concepts/GitOps workflow]]
 - [[entities/bakery-platform]]
 - [[entities/fake-buster]]
 - [[entities/stock-trader-grabit]]
+- [[entities/personal-agents]]

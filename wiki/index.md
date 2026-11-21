@@ -3,7 +3,7 @@ title: Index
 type: overview
 tags: [index, meta]
 created: 2026-07-08
-updated: 2026-11-06
+updated: 2026-11-21
 ---
 
 Katalog stránek wiki. Dotazy začínají hledáním (`python3 tools/wiki-query.py search "<dotaz>"`); tento katalog je fallback, když nástroj nebo Python nejsou dostupné.
@@ -23,6 +23,7 @@ Katalog stránek wiki. Dotazy začínají hledáním (`python3 tools/wiki-query.
 | [[entities/service-bakery]] | Legacy monolitická platforma (migrace pryč) |
 | [[entities/fake-buster]] | Pilotní app — labeler, inference, db-writer, frontend, crawler |
 | [[entities/stock-trader-grabit]] | App — stock-trader, grabit-web, frontend-st; typed instrument API, centrální product policy, web detail a bezpečný OrderTicket (pilot v2) |
+| [[entities/personal-agents]] | App — osobní jednoúčelové automatizační agenty (první: DPH), CronJob na kind-desktop 🔄 |
 
 ## Koncepty
 

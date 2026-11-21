@@ -158,6 +158,7 @@ grep -q self_update_hooks ~/.bakery-sync/hooks/lib.sh && echo OK || echo "reinst
 | service-bakery | Legacy monolith platform | 🔄 Migrating away |
 | fake-buster | App (ML fake news) | ✅ Pilot on kind-desktop |
 | stock-trader-grabit | App (trading) | ✅ Pilot on v2 |
+| personal-agents | App (osobní automatizační agenti) | 🔄 Onboarding na kind-desktop |
 
 ## Important rules
 

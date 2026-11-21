@@ -410,3 +410,13 @@ Aktualizováno: [[concepts/Wiki sync policy]], tento log.
 - ⬜ bakery-platform PR #33 (otevřený) odebírá repo z distribuce hooků: `scripts/refresh-githooks.sh`, `Taskfile.yml` (`hooks-all`), `docs/git-hooks.md`
 
 Aktualizováno: [[concepts/Wiki sync policy]], tento log.
+
+## [2026-11-21] update | personal-agents na Platform v2 + incident git-bump-tag v bakery-gitops
+
+- 🔄 Nová entita [[entities/personal-agents]]: osobní automatizační agenti (první DPH) jako CronJob na kind-desktop; platformní tvar, PV, secrets, stav checklist
+- 🔄 bakery-platform PR #34 (otevřený): `cronjobs`/`persistence` v chartu `bakery-app`, větev `personal-agents` v `apply-app-secrets.sh`, CI overlay, `PERSONAL_AGENTS_PYTHON_TAG`
+- ✅ Incident: commit `43663f0` šel přímo do bakery-gitops `dev` kvůli zbytkové lokální identitě `git-bump-tag` (hooky ji pouští); Argo vytvořil NS/CronWorkflow/Application, revert přes PR #23 (`399be71`)
+- 🔄 Root-cause fix bakery-platform PR #35 (otevřený): identita jen přes `git -c` pro commit a push; kontrola `git config --local user.name`
+- ⬜ Registrace personal-agents v bakery-gitops znovu jako běžné PR až po PR #34, PV adresáři, secrets a Dockerfile
+
+Aktualizováno: [[entities/bakery-gitops]], [[entities/bakery-platform]], [[entities/personal-agents]], [[concepts/GitOps workflow]], [[index]], tento log.
