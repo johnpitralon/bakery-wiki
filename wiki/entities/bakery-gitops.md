@@ -3,7 +3,7 @@ title: bakery-gitops
 type: entity
 tags: [repo, gitops, argocd, applicationset]
 created: 2026-07-08
-updated: 2026-11-21
+updated: 2026-11-22
 ---
 
 **GitOps** repozitář pro Bakery — odpovídá **Kytary.GitOps**. Argo CD root app syncuje tento repozitář; aplikace řídí **ApplicationSet**.
@@ -108,7 +108,7 @@ Host údržba: `task kind-disk-maintenance` v [[entities/bakery-platform]].
 - **Root-cause fix**: [[entities/bakery-platform]] PR #35 (otevřený) — skript používá `git -c user.name=git-bump-tag -c user.email=git-bump-tag@local` jen pro commit a push; hooky identitu vidí přes `GIT_CONFIG_PARAMETERS`. Ověřeno na vyhozeném klonu se skutečným pre-push hookem: bump projde, lokální identita nezůstane, ruční commit do `dev` je dál blokován.
 - **Kontrola před commitem** v klonu bakery-gitops: `git config --local user.name` nesmí vracet `git-bump-tag`.
 - `validate.yml` v bakery-gitops i `ci.yml` v bakery-platform běží jen na `main`, takže PR do `dev` nemají žádné checky.
-- Registrace aplikace [[entities/personal-agents]] bude znovu přistát jako běžné PR (podmínky v entitě).
+- Registrace aplikace [[entities/personal-agents]] byla správně znovu nasazena přes **PR #24** (merge `fa5a6d4`, 22. 11.) ✅.
 
 ## Souvislosti
 

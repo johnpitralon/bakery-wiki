@@ -3,7 +3,7 @@ title: bakery-platform
 type: entity
 tags: [repo, platform, bootstrap, helm, ci, githooks]
 created: 2026-07-08
-updated: 2026-11-21
+updated: 2026-11-22
 ---
 
 Repozitář **infrastrukturního bootstrapu** Platform v2 — náhrada části [[entities/service-bakery]]. Role **Kytary.K8S.Infrastructure**.
@@ -42,7 +42,7 @@ Repozitář **infrastrukturního bootstrapu** Platform v2 — náhrada části [
 
 ## Změny pro personal-agents a bump skript (2026-11-21) 🔄
 
-**PR #34 (otevřený) 🔄** — podpora aplikace [[entities/personal-agents]]:
+**PR #34 (merged 21. 11.) ✅** — podpora aplikace [[entities/personal-agents]]:
 
 - Chart `bakery-app`: generické `cronjobs: []` (`templates/cronjobs.yaml`, per-item `fullnameOverride`; `enabled: false` položku opravdu vypne).
 - Chart `bakery-app`: `persistence: []` (`templates/pvc.yaml`).
@@ -51,7 +51,9 @@ Repozitář **infrastrukturního bootstrapu** Platform v2 — náhrada části [
 - CI overlay `argo/workflows/overlays/personal-agents` (stejný vzor jako stock-trader-grabit: argo-ci SA/RBAC, WorkflowTemplate `service-ci`, maven cache PVC).
 - Sekce v README. Renderování fake-buster a stock-trader-grabit se nemění.
 
-**PR #35 (otevřený) 🔄** — oprava identity v `scripts/bump-gitops-image-tag.sh`: místo trvalého `git config user.name/user.email` se používá `git -c user.name=git-bump-tag -c user.email=git-bump-tag@local` jen pro commit a push; v klonu nezůstává lokální identita. Souvislost: incident v [[entities/bakery-gitops]] (2026-11-21).
+**PR #35 (merged 21. 11.) ✅** — oprava identity v `scripts/bump-gitops-image-tag.sh`: místo trvalého `git config user.name/user.email` se používá `git -c user.name=git-bump-tag -c user.email=git-bump-tag@local` jen pro commit a push; v klonu nezůstává lokální identita. Souvislost: incident v [[entities/bakery-gitops]] (2026-11-21).
+
+**PR #36 (merged 22. 11., `3181f49`) ✅** — `LLM_API_KEY` přidán do větve `personal-agents` v `scripts/apply-app-secrets.sh`.
 
 ## Bootstrap pořadí
 

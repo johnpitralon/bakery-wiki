@@ -420,3 +420,14 @@ Aktualizováno: [[concepts/Wiki sync policy]], tento log.
 - ⬜ Registrace personal-agents v bakery-gitops znovu jako běžné PR až po PR #34, PV adresáři, secrets a Dockerfile
 
 Aktualizováno: [[entities/bakery-gitops]], [[entities/bakery-platform]], [[entities/personal-agents]], [[concepts/GitOps workflow]], [[index]], tento log.
+
+## [2026-11-22] update | personal-agents nasazeno (suspend), LLM přes Kytary llm-gateway, maskování
+
+- ✅ personal-agents PR #1 merged (`03576f6`, CI zelené): DPH agent + SOPS/age secrets (`secrets:decrypt|encrypt|apply`, Keychain odstraněn)
+- ✅ bakery-gitops PR #24 (`fa5a6d4`): správný re-land registrace po revertu PR #23; CronJob `dph` `suspend: true` do akceptačního běhu, `PA_LLM_URL` v values
+- ✅ bakery-platform PR #36 (`3181f49`): `LLM_API_KEY` v `apply-app-secrets.sh`; PR #34 a #35 merged 21. 11.
+- 🔄 LLM přes Kytary llm-gateway (LiteLLM, model `lmstudio/google/gemma-4-31b`) místo LM Studia, které přehřálo MacBook; větev `feat/llm-gateway` v review
+- 🔄 Maskování osobních údajů poplatníka a všech částek před modelem (tokeny, zpětné mapování v kódu); větev `feat/llm-gateway`
+- ⬜ Otevřené: CronWorkflow `personal-agents-merge-deploy` nevytvořil žádný workflow (do 01:07 CET); Secret čeká na přihlašovací údaje majitele
+
+Aktualizováno: [[entities/personal-agents]], [[entities/bakery-gitops]], [[entities/bakery-platform]], tento log.
